@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: sanjiaozhou-tool:latest
-    container_name: sanjiaozhou-tool
+    image: 78shushu:latest
+    container_name: 78shushu
     ports:
       - "3000:3000"
     volumes:
