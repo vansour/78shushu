@@ -1,5 +1,5 @@
 services:
-  sanjiaozhou-tool:
+  78shushu:
     build:
       context: .
       dockerfile: Dockerfile
