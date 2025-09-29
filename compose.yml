@@ -1,0 +1,14 @@
+services:
+  sanjiaozhou-tool:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sanjiaozhou-tool:latest
+    container_name: sanjiaozhou-tool
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./static:/app/static:ro
+    environment:
+      - RUST_LOG=info
+    restart: unless-stopped
