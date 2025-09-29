@@ -45,7 +45,6 @@ impl QuestionBank {
                 category: QuestionCategory::Weapons,
                 difficulty: Difficulty::Medium,
             },
-
             // 地图知识类题目
             Question {
                 id: 4,
@@ -86,7 +85,6 @@ impl QuestionBank {
                 category: QuestionCategory::Maps,
                 difficulty: Difficulty::Hard,
             },
-
             // 战术策略类题目
             Question {
                 id: 7,
@@ -127,7 +125,6 @@ impl QuestionBank {
                 category: QuestionCategory::Tactics,
                 difficulty: Difficulty::Medium,
             },
-
             // 装备配件类题目
             Question {
                 id: 10,
@@ -155,7 +152,6 @@ impl QuestionBank {
                 category: QuestionCategory::Equipment,
                 difficulty: Difficulty::Easy,
             },
-
             // 游戏机制类题目
             Question {
                 id: 12,
@@ -209,7 +205,6 @@ impl QuestionBank {
                 category: QuestionCategory::GameMechanics,
                 difficulty: Difficulty::Easy,
             },
-
             // 高难度综合题目
             Question {
                 id: 16,
@@ -252,32 +247,41 @@ impl QuestionBank {
             },
         ]
     }
-    
+
     pub fn get_question_by_id(id: u32) -> Option<Question> {
         Self::get_all_questions().into_iter().find(|q| q.id == id)
     }
-    
+
     pub fn get_questions_by_category(category: QuestionCategory) -> Vec<Question> {
         Self::get_all_questions()
             .into_iter()
-            .filter(|q| matches!((&q.category, &category), 
-                (QuestionCategory::Weapons, QuestionCategory::Weapons) |
-                (QuestionCategory::Maps, QuestionCategory::Maps) |
-                (QuestionCategory::Tactics, QuestionCategory::Tactics) |
-                (QuestionCategory::Equipment, QuestionCategory::Equipment) |
-                (QuestionCategory::GameMechanics, QuestionCategory::GameMechanics)
-            ))
+            .filter(|q| {
+                matches!(
+                    (&q.category, &category),
+                    (QuestionCategory::Weapons, QuestionCategory::Weapons)
+                        | (QuestionCategory::Maps, QuestionCategory::Maps)
+                        | (QuestionCategory::Tactics, QuestionCategory::Tactics)
+                        | (QuestionCategory::Equipment, QuestionCategory::Equipment)
+                        | (
+                            QuestionCategory::GameMechanics,
+                            QuestionCategory::GameMechanics
+                        )
+                )
+            })
             .collect()
     }
-    
+
     pub fn get_questions_by_difficulty(difficulty: Difficulty) -> Vec<Question> {
         Self::get_all_questions()
             .into_iter()
-            .filter(|q| matches!((&q.difficulty, &difficulty),
-                (Difficulty::Easy, Difficulty::Easy) |
-                (Difficulty::Medium, Difficulty::Medium) |
-                (Difficulty::Hard, Difficulty::Hard)
-            ))
+            .filter(|q| {
+                matches!(
+                    (&q.difficulty, &difficulty),
+                    (Difficulty::Easy, Difficulty::Easy)
+                        | (Difficulty::Medium, Difficulty::Medium)
+                        | (Difficulty::Hard, Difficulty::Hard)
+                )
+            })
             .collect()
     }
 }
