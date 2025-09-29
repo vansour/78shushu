@@ -36,7 +36,7 @@ RUN useradd -m -u 1000 appuser
 WORKDIR /app
 
 # 从构建阶段复制编译好的二进制文件
-COPY --from=builder /app/target/release/sanjiaozhou-tool /app/sanjiaozhou-tool
+COPY --from=builder /app/target/release/shushu78 /app/shushu78
 
 # 复制静态文件
 COPY --from=builder /app/static /app/static
@@ -54,4 +54,4 @@ EXPOSE 3000
 ENV RUST_LOG=info
 
 # 启动应用
-CMD ["./sanjiaozhou-tool"]
+CMD ["./shushu78"]
