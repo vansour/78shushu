@@ -1,4 +1,7 @@
+use axum::response::Json as ResponseJson;
+use rand::seq::SliceRandom;
 use serde::{Deserialize, Serialize};
+use serde_json::json;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Map {
@@ -458,4 +461,88 @@ impl Armor {
             Self::ArmorHA2HeavyBodyArmor,
         ]
     }
+}
+
+// 随机装备生成器
+pub struct RandomGenerator;
+
+impl RandomGenerator {
+    pub fn generate_loadout() -> RandomLoadout {
+        let mut rng = rand::thread_rng();
+
+        let maps = Map::all();
+        let operators = Operator::all();
+        let weapons = PrimaryWeapon::all();
+        let helmets = Helmet::all();
+        let armors = Armor::all();
+
+        RandomLoadout {
+            map: maps.choose(&mut rng).unwrap().clone(),
+            operator: operators.choose(&mut rng).unwrap().clone(),
+            primary_weapon: weapons.choose(&mut rng).unwrap().clone(),
+            helmet: helmets.choose(&mut rng).unwrap().clone(),
+            armor: armors.choose(&mut rng).unwrap().clone(),
+        }
+    }
+
+    pub fn generate_map() -> Map {
+        let mut rng = rand::thread_rng();
+        let maps = Map::all();
+        maps.choose(&mut rng).unwrap().clone()
+    }
+
+    pub fn generate_operator() -> Operator {
+        let mut rng = rand::thread_rng();
+        let operators = Operator::all();
+        operators.choose(&mut rng).unwrap().clone()
+    }
+
+    pub fn generate_weapon() -> PrimaryWeapon {
+        let mut rng = rand::thread_rng();
+        let weapons = PrimaryWeapon::all();
+        weapons.choose(&mut rng).unwrap().clone()
+    }
+
+    pub fn generate_helmet() -> Helmet {
+        let mut rng = rand::thread_rng();
+        let helmets = Helmet::all();
+        helmets.choose(&mut rng).unwrap().clone()
+    }
+
+    pub fn generate_armor() -> Armor {
+        let mut rng = rand::thread_rng();
+        let armors = Armor::all();
+        armors.choose(&mut rng).unwrap().clone()
+    }
+}
+
+// 随机装备相关接口
+pub async fn generate_full_loadout() -> ResponseJson<serde_json::Value> {
+    let loadout = RandomGenerator::generate_loadout();
+    ResponseJson(json!(loadout))
+}
+
+pub async fn generate_map() -> ResponseJson<serde_json::Value> {
+    let map = RandomGenerator::generate_map();
+    ResponseJson(json!(map))
+}
+
+pub async fn generate_operator() -> ResponseJson<serde_json::Value> {
+    let operator = RandomGenerator::generate_operator();
+    ResponseJson(json!(operator))
+}
+
+pub async fn generate_weapon() -> ResponseJson<serde_json::Value> {
+    let weapon = RandomGenerator::generate_weapon();
+    ResponseJson(json!(weapon))
+}
+
+pub async fn generate_helmet() -> ResponseJson<serde_json::Value> {
+    let helmet = RandomGenerator::generate_helmet();
+    ResponseJson(json!(helmet))
+}
+
+pub async fn generate_armor() -> ResponseJson<serde_json::Value> {
+    let armor = RandomGenerator::generate_armor();
+    ResponseJson(json!(armor))
 }
