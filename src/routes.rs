@@ -7,11 +7,6 @@ pub mod random_routes {
     pub fn router() -> Router {
         Router::new()
             .route("/api/generate/loadout", get(random::generate_full_loadout))
-            .route("/api/generate/map", get(random::generate_map))
-            .route("/api/generate/operator", get(random::generate_operator))
-            .route("/api/generate/weapon", get(random::generate_weapon))
-            .route("/api/generate/helmet", get(random::generate_helmet))
-            .route("/api/generate/armor", get(random::generate_armor))
     }
 }
 

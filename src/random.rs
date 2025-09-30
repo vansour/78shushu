@@ -354,55 +354,10 @@ impl RandomGenerator {
             armor: random_choice(&Armor::all())?,
         })
     }
-
-    pub fn generate_map() -> AppResult<Map> {
-        random_choice(&Map::all())
-    }
-
-    pub fn generate_operator() -> AppResult<Operator> {
-        random_choice(&Operator::all())
-    }
-
-    pub fn generate_weapon() -> AppResult<PrimaryWeapon> {
-        random_choice(&PrimaryWeapon::all())
-    }
-
-    pub fn generate_helmet() -> AppResult<Helmet> {
-        random_choice(&Helmet::all())
-    }
-
-    pub fn generate_armor() -> AppResult<Armor> {
-        random_choice(&Armor::all())
-    }
 }
 
 // 随机装备相关接口
 pub async fn generate_full_loadout() -> Result<ResponseJson<serde_json::Value>, AppError> {
     let loadout = RandomGenerator::generate_loadout()?;
     Ok(ResponseJson(json!(loadout)))
-}
-
-pub async fn generate_map() -> Result<ResponseJson<serde_json::Value>, AppError> {
-    let map = RandomGenerator::generate_map()?;
-    Ok(ResponseJson(json!(map)))
-}
-
-pub async fn generate_operator() -> Result<ResponseJson<serde_json::Value>, AppError> {
-    let operator = RandomGenerator::generate_operator()?;
-    Ok(ResponseJson(json!(operator)))
-}
-
-pub async fn generate_weapon() -> Result<ResponseJson<serde_json::Value>, AppError> {
-    let weapon = RandomGenerator::generate_weapon()?;
-    Ok(ResponseJson(json!(weapon)))
-}
-
-pub async fn generate_helmet() -> Result<ResponseJson<serde_json::Value>, AppError> {
-    let helmet = RandomGenerator::generate_helmet()?;
-    Ok(ResponseJson(json!(helmet)))
-}
-
-pub async fn generate_armor() -> Result<ResponseJson<serde_json::Value>, AppError> {
-    let armor = RandomGenerator::generate_armor()?;
-    Ok(ResponseJson(json!(armor)))
 }
