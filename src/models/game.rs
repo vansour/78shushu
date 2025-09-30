@@ -420,7 +420,7 @@ impl Helmet {
             Self::HelmetMHSTacticalHelmet,
             Self::HelmetGT1TacticalHelmet,
             Self::HelmetDICHTrainingHelmet,
-            Self::HelmetGNHeavyNightMarketHelmet,
+            Self::HelmetGNLongTermHeavyDutyNightVisionHelmet,
             Self::HelmetMask1IronArmHelmet,
             Self::HelmetH09RiotHelmet,
             Self::HelmetGNHeavyHelmet,
