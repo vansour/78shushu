@@ -847,23 +847,8 @@
             });
             
             try {
-                console.log('开始请求随机装备...');
-                const response = await fetch('/api/generate/loadout', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                console.log('响应状态:', response.status);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP错误: ${response.status} ${response.statusText}`);
-                }
-                
+                const response = await fetch('/api/generate/loadout');
                 const data = await response.json();
-                console.log('响应数据:', data);
                 
                 document.getElementById('fullMap').textContent = data.map;
                 document.getElementById('fullOperator').textContent = data.operator;
@@ -880,9 +865,8 @@
                 
             } catch (error) {
                 console.error('生成失败:', error);
-                alert(`装备生成失败: ${error.message}`);
                 elements.forEach(id => {
-                    document.getElementById(id).textContent = '生成失败 - 请检查控制台';
+                    document.getElementById(id).textContent = '生成失败';
                 });
             } finally {
                 elements.forEach(id => {
@@ -905,23 +889,8 @@
             resultEl.classList.add('loading');
             
             try {
-                console.log(`开始请求单个${type}...`);
-                const response = await fetch(`/api/generate/${type}`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                console.log(`${type}响应状态:`, response.status);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP错误: ${response.status} ${response.statusText}`);
-                }
-                
+                const response = await fetch(`/api/generate/${type}`);
                 const data = await response.json();
-                console.log(`${type}响应数据:`, data);
                 
                 if (type === 'weapon') {
                     resultEl.textContent = data.primary_weapon || data;
@@ -930,8 +899,7 @@
                 }
             } catch (error) {
                 console.error(`生成${type}失败:`, error);
-                alert(`${type}生成失败: ${error.message}`);
-                resultEl.textContent = '生成失败 - 请检查控制台';
+                resultEl.textContent = '生成失败';
             } finally {
                 resultEl.classList.remove('loading');
             }

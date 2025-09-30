@@ -14,7 +14,6 @@ use serde::Deserialize;
 use serde_json::json;
 use std::net::SocketAddr;
 use tower_http::{cors::CorsLayer, services::ServeDir};
-use tower_http::cors::Any;
 
 #[derive(Deserialize)]
 struct CategoryQuery {
@@ -28,15 +27,6 @@ struct DifficultyQuery {
 
 async fn index() -> Html<&'static str> {
     Html(include_str!("../static/index.html"))
-}
-
-// 健康检查端点
-async fn health_check() -> ResponseJson<serde_json::Value> {
-    ResponseJson(json!({
-        "status": "ok",
-        "message": "三角洲鼠鼠工具运行正常",
-        "service": "shushu78"
-    }))
 }
 
 // 随机装备相关接口
@@ -156,7 +146,6 @@ async fn get_playlist() -> ResponseJson<serde_json::Value> {
 async fn main() {
     let app = Router::new()
         .route("/", get(index))
-        .route("/health", get(health_check))
         // 随机装备API
         .route("/api/generate/loadout", get(generate_full_loadout))
         .route("/api/generate/map", get(generate_map))
@@ -175,13 +164,7 @@ async fn main() {
         // 音乐播放器API
         .route("/api/music/playlist", get(get_playlist))
         .nest_service("/static", ServeDir::new("static"))
-        .layer(
-            CorsLayer::new()
-                .allow_origin(Any)
-                .allow_methods(Any)
-                .allow_headers(Any)
-                .expose_headers(Any)
-        );
+        .layer(CorsLayer::permissive());
 
     let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
     println!("🚀 三角洲鼠鼠工具启动！访问 http://localhost:3000");
