@@ -265,8 +265,8 @@ pub enum Armor {
     ArmorStandardBodyArmorVest,
     #[serde(rename = "TG-H防弹衣")]
     ArmorTGHBodyArmor,
-    #[serde(rename = "射手展示背心")]
-    ArmorShooterDisplayVest,
+    #[serde(rename = "射手战术背心")]
+    ArmorShooterTacticalVest,
     #[serde(rename = "HMP特勤防弹衣")]
     ArmorHMPSpecialServiceBodyArmor,
     #[serde(rename = "武士防弹背心")]
@@ -445,7 +445,7 @@ impl Armor {
             Self::ArmorHvkQuickReleaseBodyArmor,
             Self::ArmorStandardBodyArmorVest,
             Self::ArmorTGHBodyArmor,
-            Self::ArmorShooterDisplayVest,
+            Self::ArmorShooterTacticalVest,
             Self::ArmorHMPSpecialServiceBodyArmor,
             Self::ArmorSamuraiBodyArmorVest,
             Self::ArmorAssaulterBodyArmorVest,
