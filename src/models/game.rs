@@ -3,256 +3,290 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Map {
     #[serde(rename = "零号大坝（常规）")]
-    ZeroDamRegular,
+    MapZeroDamRegular,
     #[serde(rename = "零号大坝（机密）")]
-    ZeroDamClassified,
+    MapZeroDamClassified,
     #[serde(rename = "零号大坝（前夜）")]
-    ZeroDamEveningBefore,
+    MapZeroDamEveningBefore,
     #[serde(rename = "零号大坝（长夜）")]
-    ZeroDamLongNight,
+    MapZeroDamLongNight,
     #[serde(rename = "零号大坝（终夜）")]
-    ZeroDamFinalNight,
+    MapZeroDamFinalNight,
     #[serde(rename = "长弓溪谷（常规）")]
-    LongbowValleyRegular,
+    MapLongbowValleyRegular,
     #[serde(rename = "长弓溪谷（机密）")]
-    LongbowValleyClassified,
+    MapLongbowValleyClassified,
     #[serde(rename = "巴克什（机密）")]
-    BakshClassified,
+    MapBakshClassified,
     #[serde(rename = "巴克什（绝密）")]
-    BakshTopSecret,
+    MapBakshTopSecret,
     #[serde(rename = "航天基地（机密）")]
-    SpaceBaseClassified,
+    MapSpaceBaseClassified,
     #[serde(rename = "航天基地（绝密）")]
-    SpaceBaseTopSecret,
+    MapSpaceBaseTopSecret,
     #[serde(rename = "潮汐监狱（绝密）")]
-    TidalPrisonTopSecret,
+    MapTidalPrisonTopSecret,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Operator {
     #[serde(rename = "红狼")]
-    HongLang,
+    AgentHongLang,
     #[serde(rename = "威龙")]
-    WeiLong,
+    AgentWeiLong,
     #[serde(rename = "无名")]
-    WuMing,
+    AgentWuMing,
     #[serde(rename = "疾风")]
-    JiFeng,
+    AgentJiFeng,
     #[serde(rename = "蜂医")]
-    FengYi,
+    AgentFengYi,
     #[serde(rename = "蛊")]
-    Gu,
+    AgentGu,
     #[serde(rename = "牧羊人")]
-    MuYangRen,
+    AgentMuYangRen,
     #[serde(rename = "乌鲁鲁")]
-    WuLuLu,
+    AgentWuLuLu,
     #[serde(rename = "深蓝")]
-    ShenLan,
+    AgentShenLan,
     #[serde(rename = "露娜")]
-    LuNa,
+    AgentLuNa,
     #[serde(rename = "骇爪")]
-    HaiZhua,
+    AgentHaiZhua,
     #[serde(rename = "银翼")]
-    YinYi,
+    AgentYinYi,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum PrimaryWeapon {
     //步枪
     #[serde(rename = "MK47突击步枪")]
-    MK47,
+    RifleMK47AssaultRifle,
     #[serde(rename = "KC17突击步枪")]
-    KC17,
+    RifleKC17AssaultRifle,
     #[serde(rename = "K437突击步枪")]
-    K437,
+    RifleK437AssaultRifle,
     #[serde(rename = "腾龙突击步枪")]
-    TengLong,
+    RifleTengLongAssaultRifle,
     #[serde(rename = "AS Val突击步枪")]
-    ASVal,
+    RifleASValAssaultRifle,
     #[serde(rename = "CAR-15突击步枪")]
-    CAR15,
+    RifleCAR15AssaultRifle,
     #[serde(rename = "PTR-32突击步枪")]
-    PTR32,
+    RiflePTR32AssaultRifle,
     #[serde(rename = "G3突击步枪")]
-    G3,
+    RifleG3AssaultRifle,
     #[serde(rename = "SCAR-H突击步枪")]
-    SCARH,
+    RifleSCARHAssaultRifle,
     #[serde(rename = "AK-12突击步枪")]
-    AK12,
+    RifleAK12AssaultRifle,
     #[serde(rename = "SG552突击步枪")]
-    SG552,
+    RifleSG552AssaultRifle,
     #[serde(rename = "M7突击步枪")]
-    M7,
+    RifleM7AssaultRifle,
     #[serde(rename = "AUG突击步枪")]
-    AUG,
+    RifleAUGAssaultRifle,
     #[serde(rename = "M16A4突击步枪")]
-    M16A4,
+    RifleM16A4AssaultRifle,
     #[serde(rename = "K416突击步枪")]
-    K416,
+    RifleK416AssaultRifle,
     #[serde(rename = "AKS-74U突击步枪")]
-    AKS74U,
+    RifleAKS74UAssaultRifle,
     #[serde(rename = "QBZ95-1突击步枪")]
-    QBZ951,
+    RifleQBZ951AssaultRifle,
     #[serde(rename = "AKM突击步枪")]
-    AKM,
+    RifleAKMAssaultRifle,
     #[serde(rename = "M4A1突击步枪")]
-    M4A1,
+    RifleM4A1AssaultRifle,
 
     //冲锋枪
     #[serde(rename = "QCQ171冲锋枪")]
-    QCQ171,
+    SubmachineQCQ171SubmachineGun,
     #[serde(rename = "MP7冲锋枪")]
-    MP7,
+    SubmachineMP7SubmachineGun,
     #[serde(rename = "勇士冲锋枪")]
-    YongShi,
+    SubmachineYongShiSubmachineGun,
     #[serde(rename = "SR-3M紧凑突击步枪")]
-    SR3M,
+    SubmachineSR3MCompactAssaultRifle,
     #[serde(rename = "SMG-45冲锋枪")]
-    SMG45,
+    SubmachineSMG45SubmachineGun,
     #[serde(rename = "野牛冲锋枪")]
-    YeNiu,
+    SubmachineYeNiuSubmachineGun,
     #[serde(rename = "UZI冲锋枪")]
-    UZI,
+    SubmachineUZISubmachineGun,
     #[serde(rename = "Vector冲锋枪")]
-    Vector,
+    SubmachineVectorSubmachineGun,
     #[serde(rename = "P90冲锋枪")]
-    P90,
+    SubmachineP90SubmachineGun,
     #[serde(rename = "MP5冲锋枪")]
-    MP5,
+    SubmachineMP5SubmachineGun,
 
     //霰弹枪
     #[serde(rename = "725双管霰弹枪")]
-    O725,
+    Shotgun725DoubleBarreledShotgun,
     #[serde(rename = "M870霰弹枪")]
-    M870,
+    ShotgunM870Shotgun,
     #[serde(rename = "S12K霰弹枪")]
-    S12K,
+    ShotgunS12KShotgun,
     #[serde(rename = "M1014霰弹枪")]
-    M1014,
+    ShotgunM1014Shotgun,
 
     //轻机枪
     #[serde(rename = "QJB201轻机枪")]
-    QJB201,
+    LightMachineQJB201LightMachineGun,
     #[serde(rename = "M250轻机枪")]
-    M250,
+    LightMachineM250LightMachineGun,
     #[serde(rename = "M249轻机枪")]
-    M249,
+    LightMachineM249LightMachineGun,
     #[serde(rename = "PKM轻机枪")]
-    PKM,
+    LightMachinePKMLightMachineGun,
 
     //精确射手步枪
     #[serde(rename = "Marlin杠杆步枪")]
-    Marlin,
+    PrecisionSniperRifleMarlinLeveredRifle,
     #[serde(rename = "PSG-1射手步枪")]
-    PSG1,
+    PrecisionSniperRiflePSG1PrecisionSniperRifle,
     #[serde(rename = "SR9射手步枪")]
-    SR9,
+    PrecisionSniperRifleSR9PrecisionSniperRifle,
     #[serde(rename = "SR-25射手步枪")]
-    SR25,
+    PrecisionSniperRifleSR25PrecisionSniperRifle,
     #[serde(rename = "SKS射手步枪")]
-    SKS,
+    PrecisionSniperRifleSKSPrecisionSniperRifle,
     #[serde(rename = "M14射手步枪")]
-    M14,
+    PrecisionSniperRifleM14PrecisionSniperRifle,
     #[serde(rename = "SVD狙击步枪")]
-    SVD,
+    PrecisionSniperRifleSVDSniperRifle,
     #[serde(rename = "VSS射手步枪")]
-    VSS,
+    PrecisionSniperRifleVSSPrecisionSniperRifle,
     #[serde(rename = "Mini-14射手步枪")]
-    Mini14,
+    PrecisionSniperRifleMini14PrecisionSniperRifle,
 
     //狙击步枪
     #[serde(rename = "AWP狙击步枪")]
-    AWP,
+    SniperRifleAWPSniperRifle,
     #[serde(rename = "M700狙击步枪")]
-    M700,
+    SniperRifleM700SniperRifle,
     #[serde(rename = "R93狙击步枪")]
-    R93,
+    SniperRifleR93SniperRifle,
     #[serde(rename = "SV-98狙击步枪")]
-    SV98,
+    SniperRifleSV98SniperRifle,
 
     //手枪
     #[serde(rename = "M1911")]
-    M1911,
+    HandgunM1911,
     #[serde(rename = "G17")]
-    G17,
+    HandgunG17,
     #[serde(rename = "G18")]
-    G18,
+    HandgunG18,
     #[serde(rename = "93R")]
-    O93R,
+    Handgun93R,
     #[serde(rename = "沙漠之鹰")]
-    DesertEagle,
+    HandgunDesertEagle,
     #[serde(rename = ".357左轮")]
-    O357Revolver,
+    Handgun357Revolver,
     #[serde(rename = "QSZ92G")]
-    QSZ92G,
+    HandgunQSZ92G,
 
     //特殊武器
     #[serde(rename = "复合弓")]
-    CompoundBow,
+    SpecialWeaponsCompoundBow,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Helmet {
     #[serde(rename = "老式钢盔")]
-    OldSteelHelmet,
+    HelmetOldSteelHelmet,
     #[serde(rename = "安保头盔")]
-    SecurityHelmet,
+    HelmetSecurityHelmet,
     #[serde(rename = "奔尼帽")]
-    BennyHat,
+    HelmetBennyHat,
     #[serde(rename = "户外棒球帽")]
-    OutdoorBaseballCap,
+    HelmetOutdoorBaseballCap,
     #[serde(rename = "H01 战术头盔")]
-    H01TacticalHelmet,
+    HelmetH01TacticalHelmet,
     #[serde(rename = "DRO 战术头盔")]
-    DROTacticalHelmet,
+    HelmetDROTacticalHelmet,
     #[serde(rename = "复古摩托头盔")]
-    VintageMotorcycleHelmet,
+    HelmetVintageMotorcycleHelmet,
     #[serde(rename = "MC 防弹头盔")]
-    MCBulletproofHelmet,
+    HelmetMCBulletproofHelmet,
     #[serde(rename = "防暴头盔")]
-    RiotHelmet,
+    HelmetRiotHelmet,
     #[serde(rename = "H07 战术头盔")]
-    H07TacticalHelmet,
+    HelmetH07TacticalHelmet,
     #[serde(rename = "DAS 防弹头盔")]
-    DASBulletproofHelmet,
+    HelmetDASBulletproofHelmet,
     #[serde(rename = "MC201 防弹头盔")]
-    MC201BulletproofHelmet,
+    HelmetMC201BulletproofHelmet,
     #[serde(rename = "D6 战术头盔")]
-    D6TacticalHelmet,
+    HelmetD6TacticalHelmet,
     #[serde(rename = "MHS 战术头盔")]
-    MHSTacticalHelmet,
+    HelmetMHSTacticalHelmet,
     #[serde(rename = "GT1战术头盔")]
-    GT1TacticalHelmet,
+    HelmetGT1TacticalHelmet,
     #[serde(rename = "DICH 训练头盔")]
-    DICHTrainingHelmet,
+    HelmetDICHTrainingHelmet,
     #[serde(rename = "GN 久站重型夜市头盔")]
-    GNHeavyNightMarketHelmet,
+    HelmetGNHeavyNightMarketHelmet,
     #[serde(rename = "Mask-1铁臂头盔")]
-    Mask1IronArmHelmet,
+    HelmetMask1IronArmHelmet,
     #[serde(rename = "H09 防暴头盔")]
-    H09RiotHelmet,
+    HelmetH09RiotHelmet,
     #[serde(rename = "GN 重型头盔")]
-    GNHeavyHelmet,
+    HelmetGNHeavyHelmet,
     #[serde(rename = "DICH-1战术头盔")]
-    DICH1TacticalHelmet,
+    HelmetDICH1TacticalHelmet,
     #[serde(rename = "GN重型夜视头盔")]
-    GNHeavyNightVisionHelmet,
+    HelmetGNHeavyNightVisionHelmet,
     #[serde(rename = "H70精英头盔")]
-    H70EliteHelmet,
+    HelmetH70EliteHelmet,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Armor {
-    #[serde(rename = "轻型护甲")]
-    Light,
-    #[serde(rename = "中型护甲")]
-    Medium,
-    #[serde(rename = "重型护甲")]
-    Heavy,
-    #[serde(rename = "战术背心")]
-    TacticalVest,
-    #[serde(rename = "防弹衣")]
-    BodyArmor,
+    #[serde(rename = "摩托马甲")]
+    ArmorMotorVest,
+    #[serde(rename = "安保防弹衣")]
+    ArmorSecurityBodyArmor,
+    #[serde(rename = "尼龙防弹衣")]
+    ArmorNylonBodyArmor,
+    #[serde(rename = "轻型防弹衣")]
+    ArmorLightBodyArmor,
+    #[serde(rename = "简易防刺服")]
+    ArmorLightAntiStabVest,
+    #[serde(rename = "HT战术背心")]
+    ArmorHTTacticalVest,
+    #[serde(rename = "TG战术防弹衣")]
+    ArmorTGTacticalBodyArmor,
+    #[serde(rename = "通用战术背心")]
+    ArmorUniversalTacticalVest,
+    #[serde(rename = "Hvk快拆防弹衣")]
+    ArmorHvkQuickReleaseBodyArmor,
+    #[serde(rename = "制式防弹背心")]
+    ArmorStandardBodyArmorVest,
+    #[serde(rename = "TG-H防弹衣")]
+    ArmorTGHBodyArmor,
+    #[serde(rename = "射手展示背心")]
+    ArmorShooterDisplayVest,
+    #[serde(rename = "HMP特勤防弹衣")]
+    ArmorHMPSpecialServiceBodyArmor,
+    #[serde(rename = "武士防弹背心")]
+    ArmorSamuraiBodyArmorVest,
+    #[serde(rename = "突击手防弹背心")]
+    ArmorAssaulterBodyArmorVest,
+    #[serde(rename = "DT-AVS防弹背心")]
+    ArmorDTAVSBodyArmorVest,
+    #[serde(rename = "MK-2战术背心")]
+    ArmorMK2TacticalVest,
+    #[serde(rename = "精英防弹背心")]
+    ArmorEliteBodyArmorVest,
+    #[serde(rename = "Hvk-2防弹衣")]
+    ArmorHvk2BodyArmor,
+    #[serde(rename = "FS复合防弹衣")]
+    ArmorFSCompositeBodyArmor,
+    #[serde(rename = "重型突击背心")]
+    ArmorHeavyAssaultVest,
+    #[serde(rename = "HA-2重型防弹衣")]
+    ArmorHA2HeavyBodyArmor,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -267,18 +301,18 @@ pub struct RandomLoadout {
 impl Map {
     pub fn all() -> Vec<Self> {
         vec![
-            Self::ZeroDamRegular,
-            Self::ZeroDamClassified,
-            Self::ZeroDamEveningBefore,
-            Self::ZeroDamLongNight,
-            Self::ZeroDamFinalNight,
-            Self::LongbowValleyRegular,
-            Self::LongbowValleyClassified,
-            Self::BakshClassified,
-            Self::BakshTopSecret,
-            Self::SpaceBaseClassified,
-            Self::SpaceBaseTopSecret,
-            Self::TidalPrisonTopSecret,
+            Self::MapZeroDamRegular,
+            Self::MapZeroDamClassified,
+            Self::MapZeroDamEveningBefore,
+            Self::MapZeroDamLongNight,
+            Self::MapZeroDamFinalNight,
+            Self::MapLongbowValleyRegular,
+            Self::MapLongbowValleyClassified,
+            Self::MapBakshClassified,
+            Self::MapBakshTopSecret,
+            Self::MapSpaceBaseClassified,
+            Self::MapSpaceBaseTopSecret,
+            Self::MapTidalPrisonTopSecret,
         ]
     }
 }
@@ -286,18 +320,18 @@ impl Map {
 impl Operator {
     pub fn all() -> Vec<Self> {
         vec![
-            Self::HongLang,
-            Self::WeiLong,
-            Self::WuMing,
-            Self::JiFeng,
-            Self::FengYi,
-            Self::Gu,
-            Self::MuYangRen,
-            Self::WuLuLu,
-            Self::ShenLan,
-            Self::LuNa,
-            Self::HaiZhua,
-            Self::YinYi,
+            Self::AgentHongLang,
+            Self::AgentWeiLong,
+            Self::AgentWuMing,
+            Self::AgentJiFeng,
+            Self::AgentFengYi,
+            Self::AgentGu,
+            Self::AgentMuYangRen,
+            Self::AgentWuLuLu,
+            Self::AgentShenLan,
+            Self::AgentLuNa,
+            Self::AgentHaiZhua,
+            Self::AgentYinYi,
         ]
     }
 }
@@ -305,64 +339,64 @@ impl Operator {
 impl PrimaryWeapon {
     pub fn all() -> Vec<Self> {
         vec![
-            Self::MK47,
-            Self::KC17,
-            Self::K437,
-            Self::TengLong,
-            Self::ASVal,
-            Self::CAR15,
-            Self::PTR32,
-            Self::G3,
-            Self::SCARH,
-            Self::AK12,
-            Self::SG552,
-            Self::M7,
-            Self::AUG,
-            Self::M16A4,
-            Self::K416,
-            Self::AKS74U,
-            Self::QBZ951,
-            Self::AKM,
-            Self::M4A1,
-            Self::QCQ171,
-            Self::MP7,
-            Self::YongShi,
-            Self::SR3M,
-            Self::SMG45,
-            Self::YeNiu,
-            Self::UZI,
-            Self::Vector,
-            Self::P90,
-            Self::MP5,
-            Self::O725,
-            Self::M870,
-            Self::S12K,
-            Self::M1014,
-            Self::QJB201,
-            Self::M250,
-            Self::M249,
-            Self::PKM,
-            Self::Marlin,
-            Self::PSG1,
-            Self::SR9,
-            Self::SR25,
-            Self::SKS,
-            Self::M14,
-            Self::SVD,
-            Self::VSS,
-            Self::Mini14,
-            Self::AWP,
-            Self::M700,
-            Self::R93,
-            Self::SV98,
-            Self::M1911,
-            Self::G17,
-            Self::G18,
-            Self::O93R,
-            Self::DesertEagle,
-            Self::O357Revolver,
-            Self::QSZ92G,
-            Self::CompoundBow,
+            Self::RifleMK47AssaultRifle,
+            Self::RifleKC17AssaultRifle,
+            Self::RifleK437AssaultRifle,
+            Self::RifleTengLongAssaultRifle,
+            Self::RifleASValAssaultRifle,
+            Self::RifleCAR15AssaultRifle,
+            Self::RiflePTR32AssaultRifle,
+            Self::RifleG3AssaultRifle,
+            Self::RifleSCARHAssaultRifle,
+            Self::RifleAK12AssaultRifle,
+            Self::RifleSG552AssaultRifle,
+            Self::RifleM7AssaultRifle,
+            Self::RifleAUGAssaultRifle,
+            Self::RifleM16A4AssaultRifle,
+            Self::RifleK416AssaultRifle,
+            Self::RifleAKS74UAssaultRifle,
+            Self::RifleQBZ951AssaultRifle,
+            Self::RifleAKMAssaultRifle,
+            Self::RifleM4A1AssaultRifle,
+            Self::SubmachineQCQ171SubmachineGun,
+            Self::SubmachineMP7SubmachineGun,
+            Self::SubmachineYongShiSubmachineGun,
+            Self::SubmachineSR3MCompactAssaultRifle,
+            Self::SubmachineSMG45SubmachineGun,
+            Self::SubmachineYeNiuSubmachineGun,
+            Self::SubmachineUZISubmachineGun,
+            Self::SubmachineVectorSubmachineGun,
+            Self::SubmachineP90SubmachineGun,
+            Self::SubmachineMP5SubmachineGun,
+            Self::Shotgun725DoubleBarreledShotgun,
+            Self::ShotgunM870Shotgun,
+            Self::ShotgunS12KShotgun,
+            Self::ShotgunM1014Shotgun,
+            Self::LightMachineQJB201LightMachineGun,
+            Self::LightMachineM250LightMachineGun,
+            Self::LightMachineM249LightMachineGun,
+            Self::LightMachinePKMLightMachineGun,
+            Self::PrecisionSniperRifleMarlinLeveredRifle,
+            Self::PrecisionSniperRiflePSG1PrecisionSniperRifle,
+            Self::PrecisionSniperRifleSR9PrecisionSniperRifle,
+            Self::PrecisionSniperRifleSR25PrecisionSniperRifle,
+            Self::PrecisionSniperRifleSKSPrecisionSniperRifle,
+            Self::PrecisionSniperRifleM14PrecisionSniperRifle,
+            Self::PrecisionSniperRifleSVDSniperRifle,
+            Self::PrecisionSniperRifleVSSPrecisionSniperRifle,
+            Self::PrecisionSniperRifleMini14PrecisionSniperRifle,
+            Self::SniperRifleAWPSniperRifle,
+            Self::SniperRifleM700SniperRifle,
+            Self::SniperRifleR93SniperRifle,
+            Self::SniperRifleSV98SniperRifle,
+            Self::HandgunM1911,
+            Self::HandgunG17,
+            Self::HandgunG18,
+            Self::Handgun93R,
+            Self::HandgunDesertEagle,
+            Self::Handgun357Revolver,
+            Self::HandgunQSZ92G,
+            Self::SpecialWeaponsCompoundBow,
         ]
     }
 }
@@ -370,29 +404,29 @@ impl PrimaryWeapon {
 impl Helmet {
     pub fn all() -> Vec<Self> {
         vec![
-            Self::OldSteelHelmet,
-            Self::SecurityHelmet,
-            Self::BennyHat,
-            Self::OutdoorBaseballCap,
-            Self::H01TacticalHelmet,
-            Self::DROTacticalHelmet,
-            Self::VintageMotorcycleHelmet,
-            Self::MCBulletproofHelmet,
-            Self::RiotHelmet,
-            Self::H07TacticalHelmet,
-            Self::DASBulletproofHelmet,
-            Self::MC201BulletproofHelmet,
-            Self::D6TacticalHelmet,
-            Self::MHSTacticalHelmet,
-            Self::GT1TacticalHelmet,
-            Self::DICHTrainingHelmet,
-            Self::GNHeavyNightMarketHelmet,
-            Self::Mask1IronArmHelmet,
-            Self::H09RiotHelmet,
-            Self::GNHeavyHelmet,
-            Self::DICH1TacticalHelmet,
-            Self::GNHeavyNightVisionHelmet,
-            Self::H70EliteHelmet,
+            Self::HelmetOldSteelHelmet,
+            Self::HelmetSecurityHelmet,
+            Self::HelmetBennyHat,
+            Self::HelmetOutdoorBaseballCap,
+            Self::HelmetH01TacticalHelmet,
+            Self::HelmetDROTacticalHelmet,
+            Self::HelmetVintageMotorcycleHelmet,
+            Self::HelmetMCBulletproofHelmet,
+            Self::HelmetRiotHelmet,
+            Self::HelmetH07TacticalHelmet,
+            Self::HelmetDASBulletproofHelmet,
+            Self::HelmetMC201BulletproofHelmet,
+            Self::HelmetD6TacticalHelmet,
+            Self::HelmetMHSTacticalHelmet,
+            Self::HelmetGT1TacticalHelmet,
+            Self::HelmetDICHTrainingHelmet,
+            Self::HelmetGNHeavyNightMarketHelmet,
+            Self::HelmetMask1IronArmHelmet,
+            Self::HelmetH09RiotHelmet,
+            Self::HelmetGNHeavyHelmet,
+            Self::HelmetDICH1TacticalHelmet,
+            Self::HelmetGNHeavyNightVisionHelmet,
+            Self::HelmetH70EliteHelmet,
         ]
     }
 }
@@ -400,11 +434,28 @@ impl Helmet {
 impl Armor {
     pub fn all() -> Vec<Self> {
         vec![
-            Self::Light,
-            Self::Medium,
-            Self::Heavy,
-            Self::TacticalVest,
-            Self::BodyArmor,
+            Self::ArmorMotorVest,
+            Self::ArmorSecurityBodyArmor,
+            Self::ArmorNylonBodyArmor,
+            Self::ArmorLightBodyArmor,
+            Self::ArmorLightAntiStabVest,
+            Self::ArmorHTTacticalVest,
+            Self::ArmorTGTacticalBodyArmor,
+            Self::ArmorUniversalTacticalVest,
+            Self::ArmorHvkQuickReleaseBodyArmor,
+            Self::ArmorStandardBodyArmorVest,
+            Self::ArmorTGHBodyArmor,
+            Self::ArmorShooterDisplayVest,
+            Self::ArmorHMPSpecialServiceBodyArmor,
+            Self::ArmorSamuraiBodyArmorVest,
+            Self::ArmorAssaulterBodyArmorVest,
+            Self::ArmorDTAVSBodyArmorVest,
+            Self::ArmorMK2TacticalVest,
+            Self::ArmorEliteBodyArmorVest,
+            Self::ArmorHvk2BodyArmor,
+            Self::ArmorFSCompositeBodyArmor,
+            Self::ArmorHeavyAssaultVest,
+            Self::ArmorHA2HeavyBodyArmor,
         ]
     }
 }
