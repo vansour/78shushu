@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>三角洲鼠鼠工具 - 随机装备 & 高考系统</title>
+    <!-- 阻止 Cloudflare 缓存特定请求 -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <style>
         * {
             margin: 0;
@@ -836,38 +840,86 @@
         
         // 原有的随机装备功能
         async function generateFullLoadout() {
+            console.log('🎲 开始生成完整配置...');
             const fullLoadoutEl = document.getElementById('fullLoadout');
             fullLoadoutEl.style.display = 'block';
             
             // 显示加载状态
             const elements = ['fullMap', 'fullOperator', 'fullWeapon', 'fullHelmet', 'fullArmor'];
             elements.forEach(id => {
-                document.getElementById(id).textContent = '生成中...';
-                document.getElementById(id).classList.add('loading');
+                const el = document.getElementById(id);
+                if (el) {
+                    el.textContent = '生成中...';
+                    el.classList.add('loading');
+                }
             });
             
             try {
-                const response = await fetch('/api/generate/loadout');
-                const data = await response.json();
+                console.log('📡 发送请求到: /api/generate/loadout');
+                const response = await fetch('/api/generate/loadout', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Cache-Control': 'no-cache'
+                    }
+                });
                 
-                document.getElementById('fullMap').textContent = data.map;
-                document.getElementById('fullOperator').textContent = data.operator;
-                document.getElementById('fullWeapon').textContent = data.primary_weapon;
-                document.getElementById('fullHelmet').textContent = data.helmet;
-                document.getElementById('fullArmor').textContent = data.armor;
+                console.log('📡 响应状态:', response.status, response.statusText);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('✅ 收到数据:', data);
+                
+                // 安全地更新每个元素
+                const updateElement = (id, value) => {
+                    const el = document.getElementById(id);
+                    if (el && value) {
+                        el.textContent = value;
+                        console.log(`✓ 更新 ${id}: ${value}`);
+                    } else {
+                        console.warn(`⚠️ 无法更新 ${id}, 元素或值为空`);
+                    }
+                };
+                
+                updateElement('fullMap', data.map);
+                updateElement('fullOperator', data.operator);
+                updateElement('fullWeapon', data.primary_weapon);
+                updateElement('fullHelmet', data.helmet);
+                updateElement('fullArmor', data.armor);
                 
                 // 同步更新单个结果
-                document.getElementById('mapResult').textContent = data.map;
-                document.getElementById('operatorResult').textContent = data.operator;
-                document.getElementById('weaponResult').textContent = data.primary_weapon;
-                document.getElementById('helmetResult').textContent = data.helmet;
-                document.getElementById('armorResult').textContent = data.armor;
+                updateElement('mapResult', data.map);
+                updateElement('operatorResult', data.operator);
+                updateElement('weaponResult', data.primary_weapon);
+                updateElement('helmetResult', data.helmet);
+                updateElement('armorResult', data.armor);
+                
+                console.log('🎉 完整配置生成成功');
                 
             } catch (error) {
-                console.error('生成失败:', error);
-                elements.forEach(id => {
-                    document.getElementById(id).textContent = '生成失败';
+                console.error('❌ 生成失败:', error);
+                console.error('❌ 错误详情:', {
+                    message: error.message,
+                    stack: error.stack,
+                    name: error.name
                 });
+                
+                elements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.textContent = '生成失败';
+                    }
+                });
+                
+                // 显示用户友好的错误信息
+                const errorMsg = error.message.includes('fetch') ? 
+                    '网络连接失败，请检查网络或稍后重试' : 
+                    `生成失败: ${error.message}`;
+                    
+                alert(errorMsg);
             } finally {
                 elements.forEach(id => {
                     document.getElementById(id).classList.remove('loading');
@@ -1076,12 +1128,6 @@
                 option.onclick = null; // 禁用点击
             });
         }
-        
-        // 页面加载完成后自动生成一次完整配置
-        window.addEventListener('load', () => {
-            setTimeout(generateFullLoadout, 500);
-            loadPlaylist();
-        });
         
         // 音乐播放器功能
         let currentSongIndex = 0;
@@ -1316,6 +1362,60 @@
                 // musicPlayer.classList.remove('show');
                 // isPlayerVisible = false;
             }
+        });
+        
+        // Cloudflare 兼容性和初始化
+        function initializeApp() {
+            console.log('🚀 应用初始化开始...');
+            
+            // 检查关键元素是否存在
+            const criticalElements = [
+                'fullLoadout', 'fullMap', 'fullOperator', 'fullWeapon', 'fullHelmet', 'fullArmor',
+                'mapResult', 'operatorResult', 'weaponResult', 'helmetResult', 'armorResult'
+            ];
+            
+            let missingElements = [];
+            criticalElements.forEach(id => {
+                if (!document.getElementById(id)) {
+                    missingElements.push(id);
+                }
+            });
+            
+            if (missingElements.length > 0) {
+                console.warn('⚠️ 缺少关键元素:', missingElements);
+            } else {
+                console.log('✅ 所有关键元素已就绪');
+            }
+            
+            // 加载音乐播放列表
+            loadPlaylist();
+            
+            // 延迟执行初始装备生成，确保 Cloudflare 脚本不干扰
+            setTimeout(() => {
+                console.log('🎲 执行初始装备生成...');
+                generateFullLoadout();
+            }, 1000); // 增加延迟到1秒，确保 CF 脚本加载完成
+        }
+        
+        // 确保在 DOM 完全加载后再执行
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            // DOM 已经加载完成
+            initializeApp();
+        }
+        
+        // 额外的保险措施：在 window.onload 后再次尝试
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                console.log('🔄 Window load 完成，确保功能正常...');
+                // 如果元素存在但内容为空，重新生成
+                const fullMapEl = document.getElementById('fullMap');
+                if (fullMapEl && (!fullMapEl.textContent || fullMapEl.textContent.includes('生成中'))) {
+                    console.log('🔄 检测到内容异常，重新生成...');
+                    generateFullLoadout();
+                }
+            }, 500);
         });
     </script>
 </body>
