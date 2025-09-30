@@ -1,6 +1,7 @@
 use axum::response::Json as ResponseJson;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+use crate::error::AppError;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Song {
@@ -16,7 +17,7 @@ pub struct Playlist {
 }
 
 // 音乐播放器相关接口
-pub async fn get_playlist() -> ResponseJson<serde_json::Value> {
+pub async fn get_playlist() -> Result<ResponseJson<serde_json::Value>, AppError> {
     let playlist = Playlist {
         songs: vec![Song {
             title: "最后一哈".to_string(),
@@ -26,5 +27,5 @@ pub async fn get_playlist() -> ResponseJson<serde_json::Value> {
         }],
     };
 
-    ResponseJson(json!(playlist))
+    Ok(ResponseJson(json!(playlist)))
 }

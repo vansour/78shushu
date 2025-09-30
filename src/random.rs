@@ -2,8 +2,18 @@ use axum::response::Json as ResponseJson;
 use rand::seq::SliceRandom;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+use strum::{EnumIter, IntoEnumIterator};
+use crate::error::{AppError, AppResult};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+// 通用随机选择函数
+fn random_choice<T: Clone>(items: &[T]) -> AppResult<T> {
+    let mut rng = rand::thread_rng();
+    items.choose(&mut rng)
+        .cloned()
+        .ok_or_else(|| AppError::RandomGenerationError("无法从空集合中选择项目".to_string()))
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, EnumIter)]
 pub enum Map {
     #[serde(rename = "零号大坝（常规）")]
     MapZeroDamRegular,
@@ -31,7 +41,7 @@ pub enum Map {
     MapTidalPrisonTopSecret,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, EnumIter)]
 pub enum Operator {
     #[serde(rename = "红狼")]
     AgentHongLang,
@@ -59,7 +69,7 @@ pub enum Operator {
     AgentYinYi,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, EnumIter)]
 pub enum PrimaryWeapon {
     //步枪
     #[serde(rename = "MK47突击步枪")]
@@ -194,7 +204,7 @@ pub enum PrimaryWeapon {
     SpecialWeaponsCompoundBow,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, EnumIter)]
 pub enum Helmet {
     #[serde(rename = "老式钢盔")]
     HelmetOldSteelHelmet,
@@ -244,7 +254,7 @@ pub enum Helmet {
     HelmetH70EliteHelmet,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, EnumIter)]
 pub enum Armor {
     #[serde(rename = "摩托马甲")]
     ArmorMotorVest,
@@ -303,163 +313,31 @@ pub struct RandomLoadout {
 
 impl Map {
     pub fn all() -> Vec<Self> {
-        vec![
-            Self::MapZeroDamRegular,
-            Self::MapZeroDamClassified,
-            Self::MapZeroDamEveningBefore,
-            Self::MapZeroDamLongNight,
-            Self::MapZeroDamFinalNight,
-            Self::MapLongbowValleyRegular,
-            Self::MapLongbowValleyClassified,
-            Self::MapBakshClassified,
-            Self::MapBakshTopSecret,
-            Self::MapSpaceBaseClassified,
-            Self::MapSpaceBaseTopSecret,
-            Self::MapTidalPrisonTopSecret,
-        ]
+        Self::iter().collect()
     }
 }
 
 impl Operator {
     pub fn all() -> Vec<Self> {
-        vec![
-            Self::AgentHongLang,
-            Self::AgentWeiLong,
-            Self::AgentWuMing,
-            Self::AgentJiFeng,
-            Self::AgentFengYi,
-            Self::AgentGu,
-            Self::AgentMuYangRen,
-            Self::AgentWuLuLu,
-            Self::AgentShenLan,
-            Self::AgentLuNa,
-            Self::AgentHaiZhua,
-            Self::AgentYinYi,
-        ]
+        Self::iter().collect()
     }
 }
 
 impl PrimaryWeapon {
     pub fn all() -> Vec<Self> {
-        vec![
-            Self::RifleMK47AssaultRifle,
-            Self::RifleKC17AssaultRifle,
-            Self::RifleK437AssaultRifle,
-            Self::RifleTengLongAssaultRifle,
-            Self::RifleASValAssaultRifle,
-            Self::RifleCAR15AssaultRifle,
-            Self::RiflePTR32AssaultRifle,
-            Self::RifleG3AssaultRifle,
-            Self::RifleSCARHAssaultRifle,
-            Self::RifleAK12AssaultRifle,
-            Self::RifleSG552AssaultRifle,
-            Self::RifleM7AssaultRifle,
-            Self::RifleAUGAssaultRifle,
-            Self::RifleM16A4AssaultRifle,
-            Self::RifleK416AssaultRifle,
-            Self::RifleAKS74UAssaultRifle,
-            Self::RifleQBZ951AssaultRifle,
-            Self::RifleAKMAssaultRifle,
-            Self::RifleM4A1AssaultRifle,
-            Self::SubmachineQCQ171SubmachineGun,
-            Self::SubmachineMP7SubmachineGun,
-            Self::SubmachineYongShiSubmachineGun,
-            Self::SubmachineSR3MCompactAssaultRifle,
-            Self::SubmachineSMG45SubmachineGun,
-            Self::SubmachineYeNiuSubmachineGun,
-            Self::SubmachineUZISubmachineGun,
-            Self::SubmachineVectorSubmachineGun,
-            Self::SubmachineP90SubmachineGun,
-            Self::SubmachineMP5SubmachineGun,
-            Self::Shotgun725DoubleBarreledShotgun,
-            Self::ShotgunM870Shotgun,
-            Self::ShotgunS12KShotgun,
-            Self::ShotgunM1014Shotgun,
-            Self::LightMachineQJB201LightMachineGun,
-            Self::LightMachineM250LightMachineGun,
-            Self::LightMachineM249LightMachineGun,
-            Self::LightMachinePKMLightMachineGun,
-            Self::PrecisionSniperRifleMarlinLeveredRifle,
-            Self::PrecisionSniperRiflePSG1PrecisionSniperRifle,
-            Self::PrecisionSniperRifleSR9PrecisionSniperRifle,
-            Self::PrecisionSniperRifleSR25PrecisionSniperRifle,
-            Self::PrecisionSniperRifleSKSPrecisionSniperRifle,
-            Self::PrecisionSniperRifleM14PrecisionSniperRifle,
-            Self::PrecisionSniperRifleSVDSniperRifle,
-            Self::PrecisionSniperRifleVSSPrecisionSniperRifle,
-            Self::PrecisionSniperRifleMini14PrecisionSniperRifle,
-            Self::SniperRifleAWPSniperRifle,
-            Self::SniperRifleM700SniperRifle,
-            Self::SniperRifleR93SniperRifle,
-            Self::SniperRifleSV98SniperRifle,
-            Self::HandgunM1911,
-            Self::HandgunG17,
-            Self::HandgunG18,
-            Self::Handgun93R,
-            Self::HandgunDesertEagle,
-            Self::Handgun357Revolver,
-            Self::HandgunQSZ92G,
-            Self::SpecialWeaponsCompoundBow,
-        ]
+        Self::iter().collect()
     }
 }
 
 impl Helmet {
     pub fn all() -> Vec<Self> {
-        vec![
-            Self::HelmetOldSteelHelmet,
-            Self::HelmetSecurityHelmet,
-            Self::HelmetBennyHat,
-            Self::HelmetOutdoorBaseballCap,
-            Self::HelmetH01TacticalHelmet,
-            Self::HelmetDROTacticalHelmet,
-            Self::HelmetVintageMotorcycleHelmet,
-            Self::HelmetMCBulletproofHelmet,
-            Self::HelmetRiotHelmet,
-            Self::HelmetH07TacticalHelmet,
-            Self::HelmetDASBulletproofHelmet,
-            Self::HelmetMC201BulletproofHelmet,
-            Self::HelmetD6TacticalHelmet,
-            Self::HelmetMHSTacticalHelmet,
-            Self::HelmetGT1TacticalHelmet,
-            Self::HelmetDICHTrainingHelmet,
-            Self::HelmetGNLongTermHeavyDutyNightVisionHelmet,
-            Self::HelmetMask1IronArmHelmet,
-            Self::HelmetH09RiotHelmet,
-            Self::HelmetGNHeavyHelmet,
-            Self::HelmetDICH1TacticalHelmet,
-            Self::HelmetGNHeavyNightVisionHelmet,
-            Self::HelmetH70EliteHelmet,
-        ]
+        Self::iter().collect()
     }
 }
 
 impl Armor {
     pub fn all() -> Vec<Self> {
-        vec![
-            Self::ArmorMotorVest,
-            Self::ArmorSecurityBodyArmor,
-            Self::ArmorNylonBodyArmor,
-            Self::ArmorLightBodyArmor,
-            Self::ArmorLightAntiStabVest,
-            Self::ArmorHTTacticalVest,
-            Self::ArmorTGTacticalBodyArmor,
-            Self::ArmorUniversalTacticalVest,
-            Self::ArmorHvkQuickReleaseBodyArmor,
-            Self::ArmorStandardBodyArmorVest,
-            Self::ArmorTGHBodyArmor,
-            Self::ArmorShooterTacticalVest,
-            Self::ArmorHMPSpecialServiceBodyArmor,
-            Self::ArmorSamuraiBodyArmorVest,
-            Self::ArmorAssaulterBodyArmorVest,
-            Self::ArmorDTAVSBodyArmorVest,
-            Self::ArmorMK2TacticalVest,
-            Self::ArmorEliteBodyArmorVest,
-            Self::ArmorHvk2BodyArmor,
-            Self::ArmorFSCompositeBodyArmor,
-            Self::ArmorHeavyAssaultVest,
-            Self::ArmorHA2HeavyBodyArmor,
-        ]
+        Self::iter().collect()
     }
 }
 
@@ -467,82 +345,64 @@ impl Armor {
 pub struct RandomGenerator;
 
 impl RandomGenerator {
-    pub fn generate_loadout() -> RandomLoadout {
-        let mut rng = rand::thread_rng();
-
-        let maps = Map::all();
-        let operators = Operator::all();
-        let weapons = PrimaryWeapon::all();
-        let helmets = Helmet::all();
-        let armors = Armor::all();
-
-        RandomLoadout {
-            map: maps.choose(&mut rng).unwrap().clone(),
-            operator: operators.choose(&mut rng).unwrap().clone(),
-            primary_weapon: weapons.choose(&mut rng).unwrap().clone(),
-            helmet: helmets.choose(&mut rng).unwrap().clone(),
-            armor: armors.choose(&mut rng).unwrap().clone(),
-        }
+    pub fn generate_loadout() -> AppResult<RandomLoadout> {
+        Ok(RandomLoadout {
+            map: random_choice(&Map::all())?,
+            operator: random_choice(&Operator::all())?,
+            primary_weapon: random_choice(&PrimaryWeapon::all())?,
+            helmet: random_choice(&Helmet::all())?,
+            armor: random_choice(&Armor::all())?,
+        })
     }
 
-    pub fn generate_map() -> Map {
-        let mut rng = rand::thread_rng();
-        let maps = Map::all();
-        maps.choose(&mut rng).unwrap().clone()
+    pub fn generate_map() -> AppResult<Map> {
+        random_choice(&Map::all())
     }
 
-    pub fn generate_operator() -> Operator {
-        let mut rng = rand::thread_rng();
-        let operators = Operator::all();
-        operators.choose(&mut rng).unwrap().clone()
+    pub fn generate_operator() -> AppResult<Operator> {
+        random_choice(&Operator::all())
     }
 
-    pub fn generate_weapon() -> PrimaryWeapon {
-        let mut rng = rand::thread_rng();
-        let weapons = PrimaryWeapon::all();
-        weapons.choose(&mut rng).unwrap().clone()
+    pub fn generate_weapon() -> AppResult<PrimaryWeapon> {
+        random_choice(&PrimaryWeapon::all())
     }
 
-    pub fn generate_helmet() -> Helmet {
-        let mut rng = rand::thread_rng();
-        let helmets = Helmet::all();
-        helmets.choose(&mut rng).unwrap().clone()
+    pub fn generate_helmet() -> AppResult<Helmet> {
+        random_choice(&Helmet::all())
     }
 
-    pub fn generate_armor() -> Armor {
-        let mut rng = rand::thread_rng();
-        let armors = Armor::all();
-        armors.choose(&mut rng).unwrap().clone()
+    pub fn generate_armor() -> AppResult<Armor> {
+        random_choice(&Armor::all())
     }
 }
 
 // 随机装备相关接口
-pub async fn generate_full_loadout() -> ResponseJson<serde_json::Value> {
-    let loadout = RandomGenerator::generate_loadout();
-    ResponseJson(json!(loadout))
+pub async fn generate_full_loadout() -> Result<ResponseJson<serde_json::Value>, AppError> {
+    let loadout = RandomGenerator::generate_loadout()?;
+    Ok(ResponseJson(json!(loadout)))
 }
 
-pub async fn generate_map() -> ResponseJson<serde_json::Value> {
-    let map = RandomGenerator::generate_map();
-    ResponseJson(json!(map))
+pub async fn generate_map() -> Result<ResponseJson<serde_json::Value>, AppError> {
+    let map = RandomGenerator::generate_map()?;
+    Ok(ResponseJson(json!(map)))
 }
 
-pub async fn generate_operator() -> ResponseJson<serde_json::Value> {
-    let operator = RandomGenerator::generate_operator();
-    ResponseJson(json!(operator))
+pub async fn generate_operator() -> Result<ResponseJson<serde_json::Value>, AppError> {
+    let operator = RandomGenerator::generate_operator()?;
+    Ok(ResponseJson(json!(operator)))
 }
 
-pub async fn generate_weapon() -> ResponseJson<serde_json::Value> {
-    let weapon = RandomGenerator::generate_weapon();
-    ResponseJson(json!(weapon))
+pub async fn generate_weapon() -> Result<ResponseJson<serde_json::Value>, AppError> {
+    let weapon = RandomGenerator::generate_weapon()?;
+    Ok(ResponseJson(json!(weapon)))
 }
 
-pub async fn generate_helmet() -> ResponseJson<serde_json::Value> {
-    let helmet = RandomGenerator::generate_helmet();
-    ResponseJson(json!(helmet))
+pub async fn generate_helmet() -> Result<ResponseJson<serde_json::Value>, AppError> {
+    let helmet = RandomGenerator::generate_helmet()?;
+    Ok(ResponseJson(json!(helmet)))
 }
 
-pub async fn generate_armor() -> ResponseJson<serde_json::Value> {
-    let armor = RandomGenerator::generate_armor();
-    ResponseJson(json!(armor))
+pub async fn generate_armor() -> Result<ResponseJson<serde_json::Value>, AppError> {
+    let armor = RandomGenerator::generate_armor()?;
+    Ok(ResponseJson(json!(armor)))
 }
