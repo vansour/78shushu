@@ -225,8 +225,8 @@ pub enum Helmet {
     HelmetGT1TacticalHelmet,
     #[serde(rename = "DICH 训练头盔")]
     HelmetDICHTrainingHelmet,
-    #[serde(rename = "GN 久站重型夜市头盔")]
-    HelmetGNHeavyNightMarketHelmet,
+    #[serde(rename = "GN 久战重型夜视头盔")]
+    HelmetGNLongTermHeavyDutyNightVisionHelmet,
     #[serde(rename = "Mask-1铁臂头盔")]
     HelmetMask1IronArmHelmet,
     #[serde(rename = "H09 防暴头盔")]
