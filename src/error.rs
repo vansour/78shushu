@@ -12,11 +12,20 @@ pub enum AppError {
     #[error("音乐播放器错误: {0}")]
     MusicError(String),
     
+    #[error("配置文件错误: {0}")]
+    ConfigError(String),
+    
     #[error("IO错误: {0}")]
     IoError(#[from] std::io::Error),
     
     #[error("JSON序列化错误: {0}")]
     JsonError(#[from] serde_json::Error),
+}
+
+impl AppError {
+    pub fn new(message: String) -> Self {
+        AppError::ConfigError(message)
+    }
 }
 
 // 定义Result类型别名
@@ -33,6 +42,7 @@ impl axum::response::IntoResponse for AppError {
             AppError::RandomGenerationError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
             AppError::QuestionError(_) => (StatusCode::NOT_FOUND, self.to_string()),
             AppError::MusicError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::ConfigError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
             AppError::IoError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
             AppError::JsonError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
         };

@@ -5,6 +5,7 @@ use axum::{
 use rand::seq::SliceRandom;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+use crate::error::AppError;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Question {
@@ -74,38 +75,25 @@ pub struct DifficultyQuery {
 pub struct QuestionBank;
 
 impl QuestionBank {
-    pub fn get_all_questions() -> Vec<Question> {
-        // 尝试从JSON文件读取数据，如果失败则使用默认数据
-        if let Ok(content) = std::fs::read_to_string("static/question.json") {
-            if let Ok(questions) = serde_json::from_str::<Vec<Question>>(&content) {
-                return questions;
-            }
-        }
+    pub fn get_all_questions() -> Result<Vec<Question>, AppError> {
+        // 尝试从JSON文件读取数据
+        let content = std::fs::read_to_string("static/question.json")
+            .map_err(|e| AppError::new(format!("无法读取题目配置文件 static/question.json: {}", e)))?;
         
-        // 默认数据作为fallback
-        vec![
-            Question {
-                id: 1,
-                question: "在《三角洲行动》中，AK-74突击步枪的标准弹匣容量是多少发？".to_string(),
-                options: [
-                    "20发".to_string(),
-                    "30发".to_string(),
-                    "40发".to_string(),
-                    "60发".to_string(),
-                ],
-                correct_answer: 1,
-                category: QuestionCategory::Weapons,
-                difficulty: Difficulty::Easy,
-            },
-        ]
+        let questions = serde_json::from_str::<Vec<Question>>(&content)
+            .map_err(|e| AppError::new(format!("题目配置文件格式错误: {}", e)))?;
+        
+        Ok(questions)
     }
 
-    pub fn get_question_by_id(id: u32) -> Option<Question> {
-        Self::get_all_questions().into_iter().find(|q| q.id == id)
+    pub fn get_question_by_id(id: u32) -> Result<Option<Question>, AppError> {
+        let questions = Self::get_all_questions()?;
+        Ok(questions.into_iter().find(|q| q.id == id))
     }
 
-    pub fn get_questions_by_category(category: QuestionCategory) -> Vec<Question> {
-        Self::get_all_questions()
+    pub fn get_questions_by_category(category: QuestionCategory) -> Result<Vec<Question>, AppError> {
+        let questions = Self::get_all_questions()?;
+        Ok(questions
             .into_iter()
             .filter(|q| {
                 matches!(
@@ -120,11 +108,12 @@ impl QuestionBank {
                         )
                 )
             })
-            .collect()
+            .collect())
     }
 
-    pub fn get_questions_by_difficulty(difficulty: Difficulty) -> Vec<Question> {
-        Self::get_all_questions()
+    pub fn get_questions_by_difficulty(difficulty: Difficulty) -> Result<Vec<Question>, AppError> {
+        let questions = Self::get_all_questions()?;
+        Ok(questions
             .into_iter()
             .filter(|q| {
                 matches!(
@@ -134,7 +123,7 @@ impl QuestionBank {
                         | (Difficulty::Hard, Difficulty::Hard)
                 )
             })
-            .collect()
+            .collect())
     }
 }
 
@@ -142,40 +131,45 @@ impl QuestionBank {
 pub struct QuestionGenerator;
 
 impl QuestionGenerator {
-    pub fn get_random_question() -> QuestionResponse {
+    pub fn get_random_question() -> Result<QuestionResponse, AppError> {
         let mut rng = rand::thread_rng();
-        let questions = QuestionBank::get_all_questions();
+        let questions = QuestionBank::get_all_questions()?;
+        
+        if questions.is_empty() {
+            return Err(AppError::new("题目配置文件为空".to_string()));
+        }
+        
         let question = questions.choose(&mut rng).unwrap().clone();
-
-        Self::format_question_response(question)
+        Ok(Self::format_question_response(question))
     }
 
-    pub fn get_random_question_by_category(category: QuestionCategory) -> Option<QuestionResponse> {
+    pub fn get_random_question_by_category(category: QuestionCategory) -> Result<QuestionResponse, AppError> {
         let mut rng = rand::thread_rng();
-        let questions = QuestionBank::get_questions_by_category(category);
+        let questions = QuestionBank::get_questions_by_category(category)?;
 
         if questions.is_empty() {
-            return None;
+            return Err(AppError::new("该分类下没有题目".to_string()));
         }
 
         let question = questions.choose(&mut rng).unwrap().clone();
-        Some(Self::format_question_response(question))
+        Ok(Self::format_question_response(question))
     }
 
-    pub fn get_random_question_by_difficulty(difficulty: Difficulty) -> Option<QuestionResponse> {
+    pub fn get_random_question_by_difficulty(difficulty: Difficulty) -> Result<QuestionResponse, AppError> {
         let mut rng = rand::thread_rng();
-        let questions = QuestionBank::get_questions_by_difficulty(difficulty);
+        let questions = QuestionBank::get_questions_by_difficulty(difficulty)?;
 
         if questions.is_empty() {
-            return None;
+            return Err(AppError::new("该难度下没有题目".to_string()));
         }
 
         let question = questions.choose(&mut rng).unwrap().clone();
-        Some(Self::format_question_response(question))
+        Ok(Self::format_question_response(question))
     }
 
-    pub fn check_answer(question_id: u32, selected_option: u8) -> Option<AnswerResult> {
-        let question = QuestionBank::get_question_by_id(question_id)?;
+    pub fn check_answer(question_id: u32, selected_option: u8) -> Result<AnswerResult, AppError> {
+        let question = QuestionBank::get_question_by_id(question_id)?
+            .ok_or_else(|| AppError::new("题目不存在".to_string()))?;
 
         let is_correct = question.correct_answer == selected_option;
         let correct_option = format!(
@@ -189,7 +183,7 @@ impl QuestionGenerator {
             question.options[question.correct_answer as usize]
         );
 
-        Some(AnswerResult {
+        Ok(AnswerResult {
             is_correct,
             correct_answer: question.correct_answer,
             correct_option,
@@ -246,14 +240,14 @@ impl QuestionGenerator {
 }
 
 // 三角洲高考相关接口
-pub async fn get_random_question() -> ResponseJson<serde_json::Value> {
-    let question_response = QuestionGenerator::get_random_question();
-    ResponseJson(json!(question_response))
+pub async fn get_random_question() -> Result<ResponseJson<serde_json::Value>, AppError> {
+    let question_response = QuestionGenerator::get_random_question()?;
+    Ok(ResponseJson(json!(question_response)))
 }
 
 pub async fn get_question_by_category(
     Query(params): Query<CategoryQuery>,
-) -> ResponseJson<serde_json::Value> {
+) -> Result<ResponseJson<serde_json::Value>, AppError> {
     if let Some(category_str) = params.category {
         let category = match category_str.as_str() {
             "weapons" | "武器知识" => QuestionCategory::Weapons,
@@ -261,54 +255,39 @@ pub async fn get_question_by_category(
             "tactics" | "战术策略" => QuestionCategory::Tactics,
             "equipment" | "装备配件" => QuestionCategory::Equipment,
             "game" | "游戏机制" => QuestionCategory::GameMechanics,
-            _ => return ResponseJson(json!({"error": "Invalid category"})),
+            _ => return Err(AppError::new("无效的题目分类".to_string())),
         };
 
-        if let Some(question_response) =
-            QuestionGenerator::get_random_question_by_category(category)
-        {
-            ResponseJson(json!(question_response))
-        } else {
-            ResponseJson(json!({"error": "No questions found for this category"}))
-        }
+        let question_response = QuestionGenerator::get_random_question_by_category(category)?;
+        Ok(ResponseJson(json!(question_response)))
     } else {
-        let question_response = QuestionGenerator::get_random_question();
-        ResponseJson(json!(question_response))
+        let question_response = QuestionGenerator::get_random_question()?;
+        Ok(ResponseJson(json!(question_response)))
     }
 }
 
 pub async fn get_question_by_difficulty(
     Query(params): Query<DifficultyQuery>,
-) -> ResponseJson<serde_json::Value> {
+) -> Result<ResponseJson<serde_json::Value>, AppError> {
     if let Some(difficulty_str) = params.difficulty {
         let difficulty = match difficulty_str.as_str() {
             "easy" | "简单" => Difficulty::Easy,
             "medium" | "中等" => Difficulty::Medium,
             "hard" | "困难" => Difficulty::Hard,
-            _ => return ResponseJson(json!({"error": "Invalid difficulty"})),
+            _ => return Err(AppError::new("无效的难度等级".to_string())),
         };
 
-        if let Some(question_response) =
-            QuestionGenerator::get_random_question_by_difficulty(difficulty)
-        {
-            ResponseJson(json!(question_response))
-        } else {
-            ResponseJson(json!({"error": "No questions found for this difficulty"}))
-        }
+        let question_response = QuestionGenerator::get_random_question_by_difficulty(difficulty)?;
+        Ok(ResponseJson(json!(question_response)))
     } else {
-        let question_response = QuestionGenerator::get_random_question();
-        ResponseJson(json!(question_response))
+        let question_response = QuestionGenerator::get_random_question()?;
+        Ok(ResponseJson(json!(question_response)))
     }
 }
 
 pub async fn submit_answer(
     Json(submission): Json<AnswerSubmission>,
-) -> ResponseJson<serde_json::Value> {
-    if let Some(result) =
-        QuestionGenerator::check_answer(submission.question_id, submission.selected_option)
-    {
-        ResponseJson(json!(result))
-    } else {
-        ResponseJson(json!({"error": "Question not found"}))
-    }
+) -> Result<ResponseJson<serde_json::Value>, AppError> {
+    let result = QuestionGenerator::check_answer(submission.question_id, submission.selected_option)?;
+    Ok(ResponseJson(json!(result)))
 }

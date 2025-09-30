@@ -3,12 +3,11 @@
     {
       "id": "default",
       "name": "默认播放列表",
-      "description": "系统默认音乐",
       "songs": [
         {
           "id": "song-1",
           "title": "最后一哈",
-          "artist": "游戏原声",
+          "author": "1",
           "duration": "3:27",
           "file": "/static/music/最后一哈.mp3",
           "lyrics": [
@@ -16,106 +15,7 @@
             "激动人心的旋律",
             "让我们一起战斗"
           ],
-          "bilibili_url": "https://www.bilibili.com/video/BV1234567890",
-          "cover": "/static/music/covers/default.jpg"
-        },
-        {
-          "id": "song-2",
-          "title": "三角洲主题曲",
-          "artist": "游戏原声",
-          "duration": "3:45",
-          "file": "/static/music/delta_theme.mp3",
-          "lyrics": [
-            "三角洲行动",
-            "准备就绪",
-            "出发执行任务"
-          ],
-          "bilibili_url": "https://www.bilibili.com/video/BV9876543210",
-          "cover": "/static/music/covers/delta_theme.jpg"
-        },
-        {
-          "id": "song-3",
-          "title": "战斗BGM",
-          "artist": "游戏原声",
-          "duration": "4:20",
-          "file": "/static/music/battle_bgm.mp3",
-          "lyrics": [
-            "战斗音乐",
-            "紧张刺激的节拍",
-            "胜利就在前方"
-          ],
-          "bilibili_url": "https://www.bilibili.com/video/BV5555555555",
-          "cover": "/static/music/covers/battle.jpg"
-        }
-      ]
-    },
-    {
-      "id": "action",
-      "name": "动作音乐",
-      "description": "高节奏战斗音乐",
-      "songs": [
-        {
-          "id": "action-1",
-          "title": "突击行动",
-          "artist": "游戏原声",
-          "duration": "3:15",
-          "file": "/static/music/assault.mp3",
-          "lyrics": [
-            "突击突击",
-            "快速行动",
-            "消灭目标"
-          ],
-          "bilibili_url": "https://www.bilibili.com/video/BV1111111111",
-          "cover": "/static/music/covers/assault.jpg"
-        },
-        {
-          "id": "action-2",
-          "title": "城市战场",
-          "artist": "游戏原声",
-          "duration": "4:05",
-          "file": "/static/music/urban_battle.mp3",
-          "lyrics": [
-            "城市中的战斗",
-            "街道巷战",
-            "保护平民"
-          ],
-          "bilibili_url": "https://www.bilibili.com/video/BV2222222222",
-          "cover": "/static/music/covers/urban.jpg"
-        }
-      ]
-    },
-    {
-      "id": "ambient",
-      "name": "环境音乐",
-      "description": "背景氛围音乐",
-      "songs": [
-        {
-          "id": "ambient-1",
-          "title": "基地准备",
-          "artist": "游戏原声",
-          "duration": "5:30",
-          "file": "/static/music/base_prep.mp3",
-          "lyrics": [
-            "在基地中准备",
-            "检查装备",
-            "制定作战计划"
-          ],
-          "bilibili_url": "https://www.bilibili.com/video/BV3333333333",
-          "cover": "/static/music/covers/base.jpg"
-        },
-        {
-          "id": "ambient-2",
-          "title": "夜间潜行",
-          "artist": "游戏原声",
-          "duration": "4:45",
-          "file": "/static/music/stealth.mp3",
-          "lyrics": [
-            "夜色中潜行",
-            "悄无声息",
-            "接近目标"
-          ],
-          "bilibili_url": "https://www.bilibili.com/video/BV4444444444",
-          "cover": "/static/music/covers/stealth.jpg"
+          "bilibili_url": "https://www.bilibili.com/video/BV1234567890"
         }
       ]
     }

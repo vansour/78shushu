@@ -1,5 +1,5 @@
 # 使用rust:trixie作为基础镜像进行多阶段构建
-FROM rust:trixie as builder
+FROM rust:trixie AS builder
 
 # 设置工作目录
 WORKDIR /app
@@ -22,7 +22,7 @@ COPY static ./static
 RUN touch src/main.rs && cargo build --release
 
 # 运行时镜像 - 使用debian:trixie-slim以保持轻量
-FROM debian:trixie-slim as runtime
+FROM debian:trixie-slim AS runtime
 
 # 安装运行时依赖
 RUN apt-get update && apt-get install -y \

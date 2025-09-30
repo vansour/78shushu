@@ -305,7 +305,6 @@ function getDefaultPlaylists() {
         {
             id: "default",
             name: "默认播放列表",
-            description: "系统默认音乐",
             songs: [
                 {
                     id: "default-1",
@@ -315,17 +314,6 @@ function getDefaultPlaylists() {
                     file: "/static/music/delta_theme.mp4",
                     lyrics: ["游戏主题曲", "激动人心的旋律"],
                     bilibili_url: "https://www.bilibili.com/",
-                    cover: ""
-                },
-                {
-                    id: "default-2", 
-                    title: "战斗BGM",
-                    artist: "游戏原声", 
-                    duration: "4:20",
-                    file: "/static/music/battle_bgm.mp4",
-                    lyrics: ["战斗音乐", "紧张刺激的节拍"],
-                    bilibili_url: "https://www.bilibili.com/",
-                    cover: ""
                 }
             ]
         }
