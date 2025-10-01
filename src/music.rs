@@ -25,24 +25,6 @@ pub struct MusicData {
     pub playlists: Vec<PlaylistItem>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Playlist {
-    pub songs: Vec<Song>,
-}
-
-// 用于匹配JSON文件结构的辅助结构
-#[derive(Debug, Serialize, Deserialize)]
-struct MusicJsonRoot {
-    playlists: Vec<PlaylistWithId>,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-struct PlaylistWithId {
-    id: String,
-    name: String,
-    songs: Vec<Song>,
-}
-
 // 音乐播放器相关接口
 pub async fn get_playlist() -> Result<ResponseJson<serde_json::Value>, AppError> {
     let content = std::fs::read_to_string("static/music.json")
