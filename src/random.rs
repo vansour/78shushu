@@ -1,8 +1,8 @@
+use crate::error::{AppError, AppResult};
 use axum::response::Json as ResponseJson;
 use rand::seq::SliceRandom;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
-use crate::error::{AppError, AppResult};
 
 #[derive(Debug, Deserialize)]
 struct RandomData {
@@ -16,7 +16,8 @@ struct RandomData {
 // 通用随机选择函数
 fn random_choice<T: Clone>(items: &[T]) -> AppResult<T> {
     let mut rng = rand::thread_rng();
-    items.choose(&mut rng)
+    items
+        .choose(&mut rng)
         .cloned()
         .ok_or_else(|| AppError::RandomGenerationError("无法从空集合中选择项目".to_string()))
 }
@@ -28,7 +29,7 @@ fn load_random_data() -> RandomData {
             return data;
         }
     }
-    
+
     // 默认数据作为fallback
     RandomData {
         maps: vec!["零号大坝（常规）".to_string()],
@@ -54,7 +55,7 @@ pub struct RandomGenerator;
 impl RandomGenerator {
     pub fn generate_loadout() -> AppResult<RandomLoadout> {
         let data = load_random_data();
-        
+
         Ok(RandomLoadout {
             map: random_choice(&data.maps)?,
             operator: random_choice(&data.operators)?,

@@ -1,21 +1,17 @@
 mod error;
 mod music;
-mod random;
 mod question;
+mod random;
 mod routes;
 
-use axum::{
-    response::Html,
-    routing::get,
-    Router,
-};
+use axum::http::{header, HeaderValue};
+use axum::{response::Html, routing::get, Router};
 use std::net::SocketAddr;
 use tower_http::{
-    cors::{CorsLayer, Any},
+    cors::{Any, CorsLayer},
     services::ServeDir,
     set_header::SetResponseHeaderLayer,
 };
-use axum::http::{header, HeaderValue};
 
 async fn index() -> Html<&'static str> {
     Html(include_str!("../static/index.html"))
@@ -56,7 +52,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let listener = tokio::net::TcpListener::bind(addr)
         .await
         .map_err(|e| format!("无法绑定地址 {}: {}", addr, e))?;
-    
+
     axum::serve(listener, app)
         .await
         .map_err(|e| format!("服务启动失败: {}", e))?;

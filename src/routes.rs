@@ -5,8 +5,7 @@ pub mod random_routes {
     use crate::random;
 
     pub fn router() -> Router {
-        Router::new()
-            .route("/api/generate/loadout", get(random::generate_full_loadout))
+        Router::new().route("/api/generate/loadout", get(random::generate_full_loadout))
     }
 }
 
@@ -17,9 +16,14 @@ pub mod question_routes {
     pub fn router() -> Router {
         Router::new()
             .route("/api/exam/question", get(question::get_random_question))
-            .route("/api/exam/question/category", get(question::get_question_by_category))
-            .route("/api/exam/question/difficulty", get(question::get_question_by_difficulty))
-            .route("/api/exam/answer", axum::routing::post(question::submit_answer))
+            .route(
+                "/api/exam/question/difficulty",
+                get(question::get_question_by_difficulty),
+            )
+            .route(
+                "/api/exam/answer",
+                axum::routing::post(question::submit_answer),
+            )
     }
 }
 
@@ -28,7 +32,6 @@ pub mod music_routes {
     use crate::music;
 
     pub fn router() -> Router {
-        Router::new()
-            .route("/api/music/playlist", get(music::get_playlist))
+        Router::new().route("/api/music/playlist", get(music::get_playlist))
     }
 }

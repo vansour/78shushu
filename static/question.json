@@ -9,9 +9,7 @@
       "60发"
     ],
     "correct_answer": 1,
-    "category": "武器知识",
-    "difficulty": "简单",
-    "explanation": "AK-74突击步枪使用标准的30发弹匣，这是大多数现代突击步枪的标准配置。"
+    "difficulty": "简单"
   },
   {
     "id": 2,
@@ -23,9 +21,7 @@
       "瞄准镜倍数"
     ],
     "correct_answer": 1,
-    "category": "战术策略",
-    "difficulty": "中等",
-    "explanation": "在远程狙击中，风向和风速是影响弹道最重要的环境因素，必须优先考虑并进行相应调整。"
+    "difficulty": "中等"
   },
   {
     "id": 3,
@@ -37,9 +33,7 @@
       "1983年"
     ],
     "correct_answer": 0,
-    "category": "游戏机制",
-    "difficulty": "困难",
-    "explanation": "美国陆军三角洲特种部队（1st Special Forces Operational Detachment-Delta）正式成立于1977年11月19日。"
+    "difficulty": "困难"
   },
   {
     "id": 4,
@@ -51,9 +45,7 @@
       "火箭筒"
     ],
     "correct_answer": 1,
-    "category": "装备配件",
-    "difficulty": "简单",
-    "explanation": "冲锋枪具有高射速、便于携带和操控灵活的特点，最适合城市环境的近距离战斗。"
+    "difficulty": "简单"
   },
   {
     "id": 5,
@@ -65,9 +57,7 @@
       "公园区域"
     ],
     "correct_answer": 1,
-    "category": "地图熟悉",
-    "difficulty": "中等",
-    "explanation": "高层建筑屋顶提供了最佳的视野和射击角度，能够有效控制整个战场区域。"
+    "difficulty": "中等"
   },
   {
     "id": 6,
@@ -79,9 +69,7 @@
       "400-800米"
     ],
     "correct_answer": 2,
-    "category": "装备配件",
-    "difficulty": "中等",
-    "explanation": "现代军用夜视镜的有效作用距离通常在200-400米之间，具体取决于型号和环境条件。"
+    "difficulty": "中等"
   },
   {
     "id": 7,
@@ -93,9 +81,7 @@
       "医疗救护"
     ],
     "correct_answer": 1,
-    "category": "战术策略",
-    "difficulty": "简单",
-    "explanation": "突破手负责使用专门工具或爆破装置清除门窗、墙壁等物理障碍，为团队开辟进攻路径。"
+    "difficulty": "简单"
   },
   {
     "id": 8,
@@ -107,9 +93,7 @@
       "10秒"
     ],
     "correct_answer": 1,
-    "category": "游戏机制",
-    "difficulty": "简单",
-    "explanation": "游戏中C4炸药的标准爆炸延迟时间为5秒，给玩家足够时间撤离到安全距离。"
+    "difficulty": "简单"
   },
   {
     "id": 9,
@@ -121,9 +105,7 @@
       "以上都是"
     ],
     "correct_answer": 3,
-    "category": "战术策略",
-    "difficulty": "困难",
-    "explanation": "沙漠作战环境极其恶劣，温度变化、沙尘暴和水源补给都是影响作战效果的关键因素。"
+    "difficulty": "困难"
   },
   {
     "id": 10,
@@ -135,9 +117,7 @@
       "18个月"
     ],
     "correct_answer": 1,
-    "category": "游戏机制",
-    "difficulty": "困难",
-    "explanation": "三角洲特种部队的选拔和初步训练周期通常为6个月，包括体能、技能和心理素质的全面考核。"
+    "difficulty": "困难"
   },
   {
     "id": 11,
@@ -149,9 +129,7 @@
       "铁瞄 + 战术灯"
     ],
     "correct_answer": 2,
-    "category": "武器知识",
-    "difficulty": "中等",
-    "explanation": "M4A1在中近距离作战中表现优异，全息瞄镜提供快速瞄准，消音器减少暴露风险。"
+    "difficulty": "中等"
   },
   {
     "id": 12,
@@ -163,9 +141,7 @@
       "集装箱堆叠区"
     ],
     "correct_answer": 2,
-    "category": "地图熟悉",
-    "difficulty": "困难",
-    "explanation": "起重机顶部提供了港口区域的最高制高点，视野开阔且不易被发现，是理想的狙击位置。"
+    "difficulty": "困难"
   },
   {
     "id": 13,
@@ -177,9 +153,7 @@
       "6级"
     ],
     "correct_answer": 0,
-    "category": "装备配件",
-    "difficulty": "简单",
-    "explanation": "游戏中防弹衣分为1、2、3三个防护等级，等级越高防护能力越强。"
+    "difficulty": "简单"
   },
   {
     "id": 14,
@@ -191,9 +165,7 @@
       "50-100米"
     ],
     "correct_answer": 1,
-    "category": "战术策略",
-    "difficulty": "中等",
-    "explanation": "观察手和射手应保持10-20米的距离，既能有效沟通又不会同时暴露于敌方火力之下。"
+    "difficulty": "中等"
   },
   {
     "id": 15,
@@ -205,9 +177,7 @@
       "35-45分钟"
     ],
     "correct_answer": 1,
-    "category": "游戏机制",
-    "difficulty": "简单",
-    "explanation": "标准的5v5竞技对战通常包含多轮比赛，完整比赛时间一般在15-25分钟之间。"
+    "difficulty": "简单"
   },
   {
     "id": 16,
@@ -219,9 +189,7 @@
       "随时都可以扣扳机"
     ],
     "correct_answer": 1,
-    "category": "武器知识",
-    "difficulty": "困难",
-    "explanation": "狙击手应在自然呼气后的停顿期扣扳机，此时身体最稳定，有利于提高射击精度。"
+    "difficulty": "困难"
   },
   {
     "id": 17,
@@ -233,9 +201,7 @@
       "地下隧道潜入"
     ],
     "correct_answer": 3,
-    "category": "地图熟悉",
-    "difficulty": "中等",
-    "explanation": "地下隧道提供了最好的隐蔽性，避免了开阔地带的暴露风险，是最安全的渗透路径。"
+    "difficulty": "中等"
   },
   {
     "id": 18,
@@ -247,9 +213,7 @@
       "15-20米"
     ],
     "correct_answer": 1,
-    "category": "装备配件",
-    "difficulty": "中等",
-    "explanation": "标准手榴弹的有效杀伤半径约为5-10米，破片散射范围可达更远距离。"
+    "difficulty": "中等"
   },
   {
     "id": 19,
@@ -261,9 +225,7 @@
       "侦察-突破-压制-占领"
     ],
     "correct_answer": 0,
-    "category": "战术策略",
-    "difficulty": "困难",
-    "explanation": "标准的房间清理流程是：观察房间情况-制定突入计划-执行突入-系统性清理房间的每个角落。"
+    "difficulty": "困难"
   },
   {
     "id": 20,
@@ -275,8 +237,6 @@
       "特种兵王"
     ],
     "correct_answer": 2,
-    "category": "游戏机制",
-    "difficulty": "简单",
-    "explanation": "'三角洲精英'是游戏排位系统中的最高段位，代表了玩家的顶尖实力水平。"
+    "difficulty": "简单"
   }
 ]

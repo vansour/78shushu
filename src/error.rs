@@ -5,25 +5,25 @@ use thiserror::Error;
 pub enum AppError {
     #[error("随机生成失败: {0}")]
     RandomGenerationError(String),
-    
+
     #[error("题目查询失败: {0}")]
     QuestionError(String),
-    
+
     #[error("音乐播放器错误: {0}")]
     MusicError(String),
-    
+
     #[error("IO错误: {0}")]
     IoError(#[from] std::io::Error),
-    
+
     #[error("JSON序列化错误: {0}")]
     JsonError(#[from] serde_json::Error),
-    
+
     #[error("请求参数错误: {0}")]
     BadRequest(String),
-    
+
     #[error("资源未找到: {0}")]
     NotFound(String),
-    
+
     #[error("内部服务器错误: {0}")]
     InternalServerError(String),
 }
@@ -39,14 +39,18 @@ impl axum::response::IntoResponse for AppError {
         use serde_json::json;
 
         let (status, error_message) = match &self {
-            AppError::RandomGenerationError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::RandomGenerationError(_) => {
+                (StatusCode::INTERNAL_SERVER_ERROR, self.to_string())
+            }
             AppError::QuestionError(_) => (StatusCode::NOT_FOUND, self.to_string()),
             AppError::MusicError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
             AppError::IoError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
             AppError::JsonError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
             AppError::BadRequest(_) => (StatusCode::BAD_REQUEST, self.to_string()),
             AppError::NotFound(_) => (StatusCode::NOT_FOUND, self.to_string()),
-            AppError::InternalServerError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::InternalServerError(_) => {
+                (StatusCode::INTERNAL_SERVER_ERROR, self.to_string())
+            }
         };
 
         let body = Json(json!({
