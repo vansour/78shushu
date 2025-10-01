@@ -12,20 +12,20 @@ pub enum AppError {
     #[error("音乐播放器错误: {0}")]
     MusicError(String),
     
-    #[error("配置文件错误: {0}")]
-    ConfigError(String),
-    
     #[error("IO错误: {0}")]
     IoError(#[from] std::io::Error),
     
     #[error("JSON序列化错误: {0}")]
     JsonError(#[from] serde_json::Error),
-}
-
-impl AppError {
-    pub fn new(message: String) -> Self {
-        AppError::ConfigError(message)
-    }
+    
+    #[error("请求参数错误: {0}")]
+    BadRequest(String),
+    
+    #[error("资源未找到: {0}")]
+    NotFound(String),
+    
+    #[error("内部服务器错误: {0}")]
+    InternalServerError(String),
 }
 
 // 定义Result类型别名
@@ -42,9 +42,11 @@ impl axum::response::IntoResponse for AppError {
             AppError::RandomGenerationError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
             AppError::QuestionError(_) => (StatusCode::NOT_FOUND, self.to_string()),
             AppError::MusicError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
-            AppError::ConfigError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
             AppError::IoError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
             AppError::JsonError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::BadRequest(_) => (StatusCode::BAD_REQUEST, self.to_string()),
+            AppError::NotFound(_) => (StatusCode::NOT_FOUND, self.to_string()),
+            AppError::InternalServerError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
         };
 
         let body = Json(json!({

@@ -283,42 +283,27 @@ let musicPlayer;
 async function loadPlaylistData() {
     try {
         const response = await fetch('/api/music/playlist');
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
         const data = await response.json();
-        playlists = data.playlists || getDefaultPlaylists();
+        if (data.error) {
+            throw new Error(data.error);
+        }
+        playlists = data.playlists || [];
         initializePlaylistSelector();
         if (playlists.length > 0) {
             switchPlaylist(playlists[0].id);
         }
     } catch (error) {
-        console.log('使用默认播放列表');
-        playlists = getDefaultPlaylists();
+        console.error('加载播放列表失败:', error);
+        alert('无法加载播放列表，请检查服务器配置');
+        playlists = [];
         initializePlaylistSelector();
-        if (playlists.length > 0) {
-            switchPlaylist(playlists[0].id);
-        }
     }
 }
 
-// 默认播放列表（如果API不可用）
-function getDefaultPlaylists() {
-    return [
-        {
-            id: "default",
-            name: "默认播放列表",
-            songs: [
-                {
-                    id: "default-1",
-                    title: "三角洲主题曲",
-                    artist: "游戏原声",
-                    duration: "3:45",
-                    file: "/static/music/delta_theme.mp4",
-                    lyrics: ["游戏主题曲", "激动人心的旋律"],
-                    bilibili_url: "https://www.bilibili.com/",
-                }
-            ]
-        }
-    ];
-}
+
 
 // 初始化播放列表选择器
 function initializePlaylistSelector() {
