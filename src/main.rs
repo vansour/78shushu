@@ -1,3 +1,5 @@
+mod cache;
+mod config;
 mod error;
 mod logger;
 mod music;
@@ -9,6 +11,7 @@ use axum::http::{header, HeaderValue};
 use axum::{response::Html, routing::get, Router};
 use std::net::SocketAddr;
 use tower_http::{
+    compression::CompressionLayer,
     cors::{Any, CorsLayer},
     services::ServeDir,
     set_header::SetResponseHeaderLayer,
@@ -23,6 +26,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 初始化日志记录
     logger::init();
 
+    // 加载配置
+    let config = config::get_config();
+
     // 配置CORS（生产环境应该限制为特定域名）
     let cors = CorsLayer::new()
         .allow_origin(Any) // 在生产环境中应该替换为特定域名
@@ -30,9 +36,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .allow_headers(Any);
 
     // 配置静态文件服务，添加缓存头
-    let static_files = ServeDir::new("static")
-        .precompressed_gzip()
-        .precompressed_br();
+    let static_files = if config.static_files.precompressed {
+        ServeDir::new(&config.static_files.directory)
+            .precompressed_gzip()
+            .precompressed_br()
+    } else {
+        ServeDir::new(&config.static_files.directory)
+    };
 
     let app = Router::new()
         .route("/", get(index))
@@ -40,15 +50,27 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .merge(routes::question_routes::router())
         .merge(routes::music_routes::router())
         .nest_service("/static", static_files)
+        .layer(CompressionLayer::new()) // 添加 gzip 压缩
         .layer(cors)
         .layer(SetResponseHeaderLayer::overriding(
             header::CACHE_CONTROL,
             HeaderValue::from_static("public, max-age=3600"),
         ));
 
-    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
-    tracing::info!("🚀 三角洲鼠鼠工具启动！访问 http://localhost:3000");
+    let addr = SocketAddr::from((
+        config.server.host.parse::<std::net::IpAddr>()
+            .unwrap_or_else(|_| std::net::IpAddr::V4(std::net::Ipv4Addr::new(0, 0, 0, 0))),
+        config.server.port,
+    ));
+    
+    tracing::info!("🚀 三角洲鼠鼠工具启动！");
+    tracing::info!("📍 访问地址: http://{}:{}", 
+        if config.server.host == "0.0.0.0" { "localhost" } else { &config.server.host },
+        config.server.port
+    );
     tracing::info!("📝 新功能：三角洲高考已上线！");
+    tracing::info!("⚡ gzip 压缩已启用");
+    tracing::info!("💾 缓存状态: {}", if config.cache.enabled { "已启用" } else { "已禁用" });
 
     let listener = tokio::net::TcpListener::bind(addr)
         .await

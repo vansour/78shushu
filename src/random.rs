@@ -45,13 +45,32 @@ fn random_choice<T: Clone>(items: &[T]) -> AppResult<T> {
         .ok_or_else(|| AppError::RandomGenerationError("无法从空集合中选择项目".to_string()))
 }
 
-// 从JSON文件加载随机数据
+// 从JSON文件加载随机数据（带缓存）
 fn load_random_data() -> RandomData {
     tracing::debug!(target: "random", "开始加载随机数据配置");
+
+    let config = crate::config::get_config();
+    
+    // 如果启用缓存，先尝试从缓存获取
+    if config.cache.enabled {
+        if let Some(cached_content) = crate::cache::RANDOM_DATA_CACHE.get("random_data") {
+            if let Ok(data) = serde_json::from_str::<RandomData>(&cached_content) {
+                tracing::debug!(target: "random", "从缓存加载随机数据");
+                return data;
+            }
+        }
+    }
 
     if let Ok(content) = std::fs::read_to_string("static/random.json") {
         if let Ok(data) = serde_json::from_str::<RandomData>(&content) {
             tracing::info!(target: "random", "成功加载随机数据配置");
+            
+            // 保存到缓存
+            if config.cache.enabled {
+                crate::cache::RANDOM_DATA_CACHE.set("random_data".to_string(), content);
+                tracing::debug!(target: "random", "随机数据已缓存");
+            }
+            
             return data;
         } else {
             tracing::warn!(target: "random", "解析 random.json 失败，使用默认数据");

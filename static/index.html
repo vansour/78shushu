@@ -47,16 +47,23 @@
             </div>
             
             <div id="fullLoadout" class="full-loadout" style="display: none;">
+                <h2>🎯 完整配置</h2>
                 <!-- 第一排：地图和干员 -->
                 <div class="loadout-row">
                     <div class="loadout-item">
                         <h4>地图</h4>
-                        <img id="fullMapImg" class="loadout-image" src="" alt="地图" style="display: none;">
+                        <div class="image-container">
+                            <div class="image-placeholder" id="fullMapPlaceholder"></div>
+                            <img id="fullMapImg" class="loadout-image loading" src="" alt="地图">
+                        </div>
                         <div class="value" id="fullMap">-</div>
                     </div>
                     <div class="loadout-item">
                         <h4>干员</h4>
-                        <img id="fullOperatorImg" class="loadout-image" src="" alt="干员" style="display: none;">
+                        <div class="image-container">
+                            <div class="image-placeholder" id="fullOperatorPlaceholder"></div>
+                            <img id="fullOperatorImg" class="loadout-image loading" src="" alt="干员">
+                        </div>
                         <div class="value" id="fullOperator">-</div>
                     </div>
                 </div>
@@ -64,17 +71,26 @@
                 <div class="loadout-row">
                     <div class="loadout-item">
                         <h4>主武器</h4>
-                        <img id="fullWeaponImg" class="loadout-image" src="" alt="主武器" style="display: none;">
+                        <div class="image-container">
+                            <div class="image-placeholder" id="fullWeaponPlaceholder"></div>
+                            <img id="fullWeaponImg" class="loadout-image loading" src="" alt="主武器">
+                        </div>
                         <div class="value" id="fullWeapon">-</div>
                     </div>
                     <div class="loadout-item">
                         <h4>头盔</h4>
-                        <img id="fullHelmetImg" class="loadout-image" src="" alt="头盔" style="display: none;">
+                        <div class="image-container">
+                            <div class="image-placeholder" id="fullHelmetPlaceholder"></div>
+                            <img id="fullHelmetImg" class="loadout-image loading" src="" alt="头盔">
+                        </div>
                         <div class="value" id="fullHelmet">-</div>
                     </div>
                     <div class="loadout-item">
                         <h4>护甲</h4>
-                        <img id="fullArmorImg" class="loadout-image" src="" alt="护甲" style="display: none;">
+                        <div class="image-container">
+                            <div class="image-placeholder" id="fullArmorPlaceholder"></div>
+                            <img id="fullArmorImg" class="loadout-image loading" src="" alt="护甲">
+                        </div>
                         <div class="value" id="fullArmor">-</div>
                     </div>
                 </div>
@@ -191,6 +207,10 @@
         🎵
     </div>
 
+    <!-- Toast 通知容器 -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="/static/utils.js"></script>
     <script src="/static/script.js?v=2.0"></script>
 </body>
 </html>

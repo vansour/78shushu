@@ -1,0 +1,21 @@
+# 三角洲鼠鼠工具配置文件
+
+[server]
+# 服务器监听地址
+host = "0.0.0.0"
+# 服务器端口
+port = 3000
+# 日志级别 (trace, debug, info, warn, error)
+log_level = "info"
+
+[cache]
+# 是否启用缓存
+enabled = true
+# 缓存过期时间（秒）
+ttl = 3600
+
+[static]
+# 静态文件目录
+directory = "static"
+# 是否启用预压缩
+precompressed = true

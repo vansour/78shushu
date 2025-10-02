@@ -70,9 +70,10 @@ async function generateFullLoadout() {
         const imageLoadPromises = [];
         
         // 更新元素并收集图片加载Promise
-        const updateLoadoutItem = (textId, imageId, item) => {
+        const updateLoadoutItem = (textId, imageId, placeholderId, item) => {
             const textEl = document.getElementById(textId);
             const imgEl = document.getElementById(imageId);
+            const placeholderEl = document.getElementById(placeholderId);
             
             if (textEl && item) {
                 const name = item.name || item;
@@ -83,14 +84,28 @@ async function generateFullLoadout() {
             if (imgEl && item?.image) {
                 const imageUrl = '/' + item.image.replace(/^\/+/, '');
                 
+                // 显示占位符
+                if (placeholderEl) {
+                    placeholderEl.style.display = 'block';
+                }
+                imgEl.classList.add('loading');
+                
                 // 创建图片加载Promise
-                const imageLoadPromise = new Promise((resolve, reject) => {
+                const imageLoadPromise = new Promise((resolve) => {
                     imgEl.onload = () => {
                         console.log(`✓ 图片加载成功: ${item.image}`);
+                        // 隐藏占位符，显示图片
+                        if (placeholderEl) {
+                            placeholderEl.style.display = 'none';
+                        }
+                        imgEl.classList.remove('loading');
                         resolve();
                     };
                     imgEl.onerror = () => {
                         console.warn(`⚠️ 图片加载失败: ${item.image}`);
+                        if (placeholderEl) {
+                            placeholderEl.style.display = 'none';
+                        }
                         imgEl.style.display = 'none';
                         resolve(); // 即使失败也resolve，不阻止显示
                     };
@@ -102,11 +117,11 @@ async function generateFullLoadout() {
             }
         };
         
-        updateLoadoutItem('fullMap', 'fullMapImg', data.map);
-        updateLoadoutItem('fullOperator', 'fullOperatorImg', data.operator);
-        updateLoadoutItem('fullWeapon', 'fullWeaponImg', data.primary_weapon);
-        updateLoadoutItem('fullHelmet', 'fullHelmetImg', data.helmet);
-        updateLoadoutItem('fullArmor', 'fullArmorImg', data.armor);
+        updateLoadoutItem('fullMap', 'fullMapImg', 'fullMapPlaceholder', data.map);
+        updateLoadoutItem('fullOperator', 'fullOperatorImg', 'fullOperatorPlaceholder', data.operator);
+        updateLoadoutItem('fullWeapon', 'fullWeaponImg', 'fullWeaponPlaceholder', data.primary_weapon);
+        updateLoadoutItem('fullHelmet', 'fullHelmetImg', 'fullHelmetPlaceholder', data.helmet);
+        updateLoadoutItem('fullArmor', 'fullArmorImg', 'fullArmorPlaceholder', data.armor);
         
         // 等待所有图片加载完成
         console.log('⏳ 等待所有图片加载完成...');
@@ -131,6 +146,7 @@ async function generateFullLoadout() {
         }, 50);
         
         console.log('🎉 完整配置生成成功，所有图片已加载');
+        Toast.success('装备配置生成成功！', 2000);
         
     } catch (error) {
         console.error('❌ 生成失败:', error);
@@ -155,12 +171,12 @@ async function generateFullLoadout() {
             }
         });
         
-        // 显示用户友好的错误信息
+        // 使用Toast显示用户友好的错误信息
         const errorMsg = error.message.includes('fetch') ? 
             '网络连接失败，请检查网络或稍后重试' : 
             `生成失败: ${error.message}`;
             
-        alert(errorMsg);
+        Toast.error(errorMsg, 5000);
     }
 }
 
