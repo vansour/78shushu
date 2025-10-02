@@ -17,10 +17,6 @@ pub mod question_routes {
         Router::new()
             .route("/api/exam/question", get(question::get_random_question))
             .route(
-                "/api/exam/question/difficulty",
-                get(question::get_question_by_difficulty),
-            )
-            .route(
                 "/api/exam/answer",
                 axum::routing::post(question::submit_answer),
             )

@@ -5,6 +5,7 @@ let selectedOption = null;
 function switchTab(tabName) {
     // 移除所有active类
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.menu-item').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
     
     // 激活当前标签页
@@ -16,21 +17,39 @@ function switchTab(tabName) {
 async function generateFullLoadout() {
     console.log('🎲 开始生成完整配置...');
     const fullLoadoutEl = document.getElementById('fullLoadout');
-    fullLoadoutEl.style.display = 'block';
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    
+    // 先隐藏装备显示区域，显示加载指示器
+    fullLoadoutEl.style.display = 'none';
+    fullLoadoutEl.style.opacity = '0';
+    loadingIndicator.style.display = 'block';
     
     // 显示加载状态
     const elements = ['fullMap', 'fullOperator', 'fullWeapon', 'fullHelmet', 'fullArmor'];
-    elements.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.textContent = '生成中...';
-            el.classList.add('loading');
+    const imageElements = ['fullMapImg', 'fullOperatorImg', 'fullWeaponImg', 'fullHelmetImg', 'fullArmorImg'];
+    
+    // 先隐藏所有图片
+    imageElements.forEach(id => {
+        const imgEl = document.getElementById(id);
+        if (imgEl) {
+            imgEl.style.display = 'none';
         }
     });
     
     try {
-        console.log('📡 发送请求到: /api/generate/loadout');
-        const response = await fetch('/api/generate/loadout', {
+        // 读取过滤条件
+        const classifiedOnly = document.getElementById('classifiedOnly')?.checked || false;
+        const excludePistols = document.getElementById('excludePistols')?.checked || false;
+        
+        // 构建查询参数
+        const params = new URLSearchParams();
+        if (classifiedOnly) params.append('classified_only', 'true');
+        if (excludePistols) params.append('exclude_pistols', 'true');
+        
+        const url = `/api/generate/loadout${params.toString() ? '?' + params.toString() : ''}`;
+        console.log('📡 发送请求到:', url);
+        
+        const response = await fetch(url, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -47,24 +66,71 @@ async function generateFullLoadout() {
         const data = await response.json();
         console.log('✅ 收到数据:', data);
         
-        // 安全地更新每个元素
-        const updateElement = (id, value) => {
-            const el = document.getElementById(id);
-            if (el && value) {
-                el.textContent = value;
-                console.log(`✓ 更新 ${id}: ${value}`);
-            } else {
-                console.warn(`⚠️ 无法更新 ${id}, 元素或值为空`);
+        // 收集所有需要加载的图片Promise
+        const imageLoadPromises = [];
+        
+        // 更新元素并收集图片加载Promise
+        const updateLoadoutItem = (textId, imageId, item) => {
+            const textEl = document.getElementById(textId);
+            const imgEl = document.getElementById(imageId);
+            
+            if (textEl && item) {
+                const name = item.name || item;
+                textEl.textContent = name;
+                console.log(`✓ 更新 ${textId}: ${name}`);
+            }
+            
+            if (imgEl && item?.image) {
+                const imageUrl = '/' + item.image.replace(/^\/+/, '');
+                
+                // 创建图片加载Promise
+                const imageLoadPromise = new Promise((resolve, reject) => {
+                    imgEl.onload = () => {
+                        console.log(`✓ 图片加载成功: ${item.image}`);
+                        resolve();
+                    };
+                    imgEl.onerror = () => {
+                        console.warn(`⚠️ 图片加载失败: ${item.image}`);
+                        imgEl.style.display = 'none';
+                        resolve(); // 即使失败也resolve，不阻止显示
+                    };
+                    imgEl.src = imageUrl;
+                });
+                
+                imageLoadPromises.push(imageLoadPromise);
+                console.log(`🔄 开始加载图片 ${imageId}: ${item.image}`);
             }
         };
         
-        updateElement('fullMap', data.map);
-        updateElement('fullOperator', data.operator);
-        updateElement('fullWeapon', data.primary_weapon);
-        updateElement('fullHelmet', data.helmet);
-        updateElement('fullArmor', data.armor);
+        updateLoadoutItem('fullMap', 'fullMapImg', data.map);
+        updateLoadoutItem('fullOperator', 'fullOperatorImg', data.operator);
+        updateLoadoutItem('fullWeapon', 'fullWeaponImg', data.primary_weapon);
+        updateLoadoutItem('fullHelmet', 'fullHelmetImg', data.helmet);
+        updateLoadoutItem('fullArmor', 'fullArmorImg', data.armor);
         
-        console.log('🎉 完整配置生成成功');
+        // 等待所有图片加载完成
+        console.log('⏳ 等待所有图片加载完成...');
+        await Promise.all(imageLoadPromises);
+        
+        // 显示所有成功加载的图片
+        imageElements.forEach(id => {
+            const imgEl = document.getElementById(id);
+            if (imgEl && imgEl.complete && imgEl.naturalWidth > 0) {
+                imgEl.style.display = 'block';
+            }
+        });
+        
+        // 隐藏加载指示器
+        loadingIndicator.style.display = 'none';
+        
+        // 图片加载完成后，显示装备区域并添加淡入动画
+        fullLoadoutEl.style.display = 'block';
+        setTimeout(() => {
+            fullLoadoutEl.style.transition = 'opacity 0.5s ease-in';
+            fullLoadoutEl.style.opacity = '1';
+        }, 50);
+        
+        console.log('🎉 完整配置生成成功，所有图片已加载');
         
     } catch (error) {
         console.error('❌ 生成失败:', error);
@@ -74,10 +140,18 @@ async function generateFullLoadout() {
             name: error.name
         });
         
+        // 隐藏加载指示器
+        loadingIndicator.style.display = 'none';
+        
+        // 如果出错，也要显示区域（显示错误信息）
+        fullLoadoutEl.style.display = 'block';
+        fullLoadoutEl.style.opacity = '1';
+        
         elements.forEach(id => {
             const el = document.getElementById(id);
             if (el) {
                 el.textContent = '生成失败';
+                el.classList.remove('loading');
             }
         });
         
@@ -87,10 +161,6 @@ async function generateFullLoadout() {
             `生成失败: ${error.message}`;
             
         alert(errorMsg);
-    } finally {
-        elements.forEach(id => {
-            document.getElementById(id).classList.remove('loading');
-        });
     }
 }
 
@@ -98,40 +168,12 @@ async function generateFullLoadout() {
 async function getRandomQuestion() {
     showLoading();
     try {
-        const response = await fetch('/api/exam/question');
+        // 添加时间戳防止缓存
+        const timestamp = new Date().getTime();
+        const response = await fetch(`/api/exam/question?_t=${timestamp}`, {
+            cache: 'no-store'
+        });
         const data = await response.json();
-        displayQuestion(data);
-    } catch (error) {
-        console.error('获取题目失败:', error);
-        alert('获取题目失败，请重试');
-    }
-}
-
-async function getQuestionByCategory(category) {
-    showLoading();
-    try {
-        const response = await fetch(`/api/exam/question/category?category=${category}`);
-        const data = await response.json();
-        if (data.error) {
-            alert(data.error);
-            return;
-        }
-        displayQuestion(data);
-    } catch (error) {
-        console.error('获取题目失败:', error);
-        alert('获取题目失败，请重试');
-    }
-}
-
-async function getQuestionByDifficulty(difficulty) {
-    showLoading();
-    try {
-        const response = await fetch(`/api/exam/question/difficulty?difficulty=${difficulty}`);
-        const data = await response.json();
-        if (data.error) {
-            alert(data.error);
-            return;
-        }
         displayQuestion(data);
     } catch (error) {
         console.error('获取题目失败:', error);
@@ -144,8 +186,6 @@ function showLoading() {
     examContainer.style.display = 'block';
     
     document.getElementById('questionText').textContent = '正在加载题目...';
-    document.getElementById('questionCategory').textContent = '-';
-    document.getElementById('questionDifficulty').textContent = '-';
     document.getElementById('optionsContainer').innerHTML = '';
     document.getElementById('submitBtn').disabled = true;
     document.getElementById('resultPanel').classList.remove('show');
@@ -159,8 +199,6 @@ function displayQuestion(data) {
     examContainer.style.display = 'block';
     
     document.getElementById('questionText').textContent = currentQuestion.question;
-    document.getElementById('questionCategory').textContent = currentQuestion.category;
-    document.getElementById('questionDifficulty').textContent = currentQuestion.difficulty;
     
     // 生成选项
     const optionsContainer = document.getElementById('optionsContainer');
@@ -232,7 +270,6 @@ function displayResult(result) {
     const resultPanel = document.getElementById('resultPanel');
     const resultTitle = document.getElementById('resultTitle');
     const correctAnswer = document.getElementById('correctAnswer');
-    const explanation = document.getElementById('explanation');
     
     resultPanel.classList.add('show');
     
@@ -245,13 +282,6 @@ function displayResult(result) {
         resultTitle.className = 'result-title wrong';
         resultTitle.textContent = '❌ 回答错误';
         correctAnswer.textContent = `正确答案：${result.correct_option}`;
-    }
-    
-    if (result.explanation) {
-        explanation.textContent = `解析：${result.explanation}`;
-        explanation.style.display = 'block';
-    } else {
-        explanation.style.display = 'none';
     }
     
     // 标记选项的正确性

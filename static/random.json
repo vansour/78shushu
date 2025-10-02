@@ -1,139 +1,888 @@
 {
-  "maps": [
-    "零号大坝（常规）",
-    "零号大坝（机密）",
-    "零号大坝（前夜）",
-    "零号大坝（长夜）",
-    "零号大坝（终夜）",
-    "长弓溪谷（常规）",
-    "长弓溪谷（机密）",
-    "巴克什（机密）",
-    "巴克什（绝密）",
-    "航天基地（机密）",
-    "航天基地（绝密）",
-    "潮汐监狱（绝密）"
-  ],
-  "operators": [
-    "红狼",
-    "威龙",
-    "无名",
-    "疾风",
-    "蜂医",
-    "蛊",
-    "牧羊人",
-    "乌鲁鲁",
-    "深蓝",
-    "露娜",
-    "骇爪",
-    "银翼"
-  ],
-  "primary_weapons": [
-    "MK47突击步枪",
-    "KC17突击步枪",
-    "K437突击步枪",
-    "腾龙突击步枪",
-    "AS Val突击步枪",
-    "CAR-15突击步枪",
-    "PTR-32突击步枪",
-    "G3突击步枪",
-    "SCAR-H突击步枪",
-    "AK-12突击步枪",
-    "SG552突击步枪",
-    "M7突击步枪",
-    "AUG突击步枪",
-    "M16A4突击步枪",
-    "K416突击步枪",
-    "AKS-74U突击步枪",
-    "QBZ95-1突击步枪",
-    "AKM突击步枪",
-    "M4A1突击步枪",
-    "QCQ171冲锋枪",
-    "MP7冲锋枪",
-    "勇士冲锋枪",
-    "SR-3M紧凑突击步枪",
-    "SMG-45冲锋枪",
-    "野牛冲锋枪",
-    "UZI冲锋枪",
-    "Vector冲锋枪",
-    "P90冲锋枪",
-    "MP5冲锋枪",
-    "725双管霰弹枪",
-    "M870霰弹枪",
-    "S12K霰弹枪",
-    "M1014霰弹枪",
-    "QJB201轻机枪",
-    "M250轻机枪",
-    "M249轻机枪",
-    "PKM轻机枪",
-    "Marlin杠杆步枪",
-    "PSG-1射手步枪",
-    "SR9射手步枪",
-    "SR-25射手步枪",
-    "SKS射手步枪",
-    "M14射手步枪",
-    "SVD狙击步枪",
-    "VSS射手步枪",
-    "Mini-14射手步枪",
-    "AWP狙击步枪",
-    "M700狙击步枪",
-    "R93狙击步枪",
-    "SV-98狙击步枪",
-    "M1911",
-    "G17",
-    "G18",
-    "93R",
-    "沙漠之鹰",
-    ".357左轮",
-    "QSZ92G",
-    "复合弓"
-  ],
-  "helmets": [
-    "老式钢盔",
-    "安保头盔",
-    "奔尼帽",
-    "户外棒球帽",
-    "H01 战术头盔",
-    "DRO 战术头盔",
-    "复古摩托头盔",
-    "MC 防弹头盔",
-    "防暴头盔",
-    "H07 战术头盔",
-    "DAS 防弹头盔",
-    "MC201 防弹头盔",
-    "D6 战术头盔",
-    "MHS 战术头盔",
-    "GT1战术头盔",
-    "DICH 训练头盔",
-    "GN 久战重型夜视头盔",
-    "Mask-1铁臂头盔",
-    "H09 防暴头盔",
-    "GN 重型头盔",
-    "DICH-1战术头盔",
-    "GN重型夜视头盔",
-    "H70精英头盔"
-  ],
-  "armors": [
-    "摩托马甲",
-    "安保防弹衣",
-    "尼龙防弹衣",
-    "轻型防弹衣",
-    "简易防刺服",
-    "HT战术背心",
-    "TG战术防弹衣",
-    "通用战术背心",
-    "Hvk快拆防弹衣",
-    "制式防弹背心",
-    "TG-H防弹衣",
-    "射手战术背心",
-    "HMP特勤防弹衣",
-    "武士防弹背心",
-    "突击手防弹背心",
-    "DT-AVS防弹背心",
-    "MK-2战术背心",
-    "精英防弹背心",
-    "Hvk-2防弹衣",
-    "FS复合防弹衣",
-    "重型突击背心",
-    "HA-2重型防弹衣"
-  ]
+  "maps": {
+    "categories": {
+      "零号大坝": [
+        "零号大坝（常规）",
+        "零号大坝（机密）",
+        "零号大坝（前夜）",
+        "零号大坝（长夜）",
+        "零号大坝（终夜）"
+      ],
+      "长弓溪谷": [
+        "长弓溪谷（常规）",
+        "长弓溪谷（机密）"
+      ],
+      "巴克什": [
+        "巴克什（机密）",
+        "巴克什（绝密）"
+      ],
+      "航天基地": [
+        "航天基地（机密）",
+        "航天基地（绝密）"
+      ],
+      "潮汐监狱": [
+        "潮汐监狱（绝密）"
+      ],
+      "常规地图": [
+        "零号大坝（常规）",
+        "零号大坝（前夜）",
+        "长弓溪谷（常规）"
+      ],
+      "机密地图": [
+        "零号大坝（机密）",
+        "零号大坝（长夜）",
+        "长弓溪谷（机密）",
+        "巴克什（机密）",
+        "航天基地（机密）"
+      ],
+      "绝密地图": [
+        "零号大坝（终夜）",
+        "巴克什（绝密）",
+        "航天基地（绝密）",
+        "潮汐监狱（绝密）"
+      ],
+      "所有地图": [
+        "零号大坝（常规）",
+        "零号大坝（机密）",
+        "零号大坝（前夜）",
+        "零号大坝（长夜）",
+        "零号大坝（终夜）",
+        "长弓溪谷（常规）",
+        "长弓溪谷（机密）",
+        "巴克什（机密）",
+        "巴克什（绝密）",
+        "航天基地（机密）",
+        "航天基地（绝密）",
+        "潮汐监狱（绝密）"
+      ]
+    },
+    "items": [
+      {
+        "name": "零号大坝（常规）",
+        "image": "static/picture/random/maps/零号大坝.png"
+      },
+      {
+        "name": "零号大坝（机密）",
+        "image": "static/picture/random/maps/零号大坝.png"
+      },
+      {
+        "name": "零号大坝（前夜）",
+        "image": "static/picture/random/maps/零号大坝.png"
+      },
+      {
+        "name": "零号大坝（长夜）",
+        "image": "static/picture/random/maps/零号大坝.png"
+      },
+      {
+        "name": "零号大坝（终夜）",
+        "image": "static/picture/random/maps/零号大坝.png"
+      },
+      {
+        "name": "长弓溪谷（常规）",
+        "image": "static/picture/random/maps/长弓溪谷.png"
+      },
+      {
+        "name": "长弓溪谷（机密）",
+        "image": "static/picture/random/maps/长弓溪谷.png"
+      },
+      {
+        "name": "巴克什（机密）",
+        "image": "static/picture/random/maps/巴克什.png"
+      },
+      {
+        "name": "巴克什（绝密）",
+        "image": "static/picture/random/maps/巴克什.png"
+      },
+      {
+        "name": "航天基地（机密）",
+        "image": "static/picture/random/maps/航天基地.png"
+      },
+      {
+        "name": "航天基地（绝密）",
+        "image": "static/picture/random/maps/航天基地.png"
+      },
+      {
+        "name": "潮汐监狱（绝密）",
+        "image": "static/picture/random/maps/潮汐监狱.png"
+      }
+    ]
+  },
+  "operators": {
+    "categories": {
+      "突击": [
+        "红狼",
+        "威龙",
+        "无名",
+        "疾风"
+      ],
+      "支援": [
+        "蜂医",
+        "蛊"
+      ],
+      "工程": [
+        "牧羊人",
+        "乌鲁鲁",
+        "深蓝"
+      ],
+      "侦查": [
+        "露娜",
+        "骇爪",
+        "银翼"
+      ],
+      "所有干员": [
+        "红狼",
+        "威龙",
+        "无名",
+        "疾风",
+        "蜂医",
+        "蛊",
+        "牧羊人",
+        "乌鲁鲁",
+        "深蓝",
+        "露娜",
+        "骇爪",
+        "银翼"
+      ]
+    },
+    "items": [
+      {
+        "name": "红狼",
+        "image": "static/picture/random/operators/红狼.png"
+      },
+      {
+        "name": "威龙",
+        "image": "static/picture/random/operators/威龙.png"
+      },
+      {
+        "name": "无名",
+        "image": "static/picture/random/operators/无名.png"
+      },
+      {
+        "name": "疾风",
+        "image": "static/picture/random/operators/疾风.png"
+      },
+      {
+        "name": "蜂医",
+        "image": "static/picture/random/operators/蜂医.png"
+      },
+      {
+        "name": "蛊",
+        "image": "static/picture/random/operators/蛊.png"
+      },
+      {
+        "name": "牧羊人",
+        "image": "static/picture/random/operators/牧羊人.png"
+      },
+      {
+        "name": "乌鲁鲁",
+        "image": "static/picture/random/operators/乌鲁鲁.png"
+      },
+      {
+        "name": "深蓝",
+        "image": "static/picture/random/operators/深蓝.png"
+      },
+      {
+        "name": "露娜",
+        "image": "static/picture/random/operators/露娜.png"
+      },
+      {
+        "name": "骇爪",
+        "image": "static/picture/random/operators/骇爪.png"
+      },
+      {
+        "name": "银翼",
+        "image": "static/picture/random/operators/银翼.png"
+      }
+    ]
+  },
+  "primary_weapons": {
+    "categories": {
+      "突击步枪": [
+        "MK47突击步枪",
+        "KC17突击步枪",
+        "K437突击步枪",
+        "腾龙突击步枪",
+        "AS Val突击步枪",
+        "CAR-15突击步枪",
+        "PTR-32突击步枪",
+        "G3突击步枪",
+        "SCAR-H突击步枪",
+        "AK-12突击步枪",
+        "SG552突击步枪",
+        "M7突击步枪",
+        "AUG突击步枪",
+        "M16A4突击步枪",
+        "K416突击步枪",
+        "AKS-74U突击步枪",
+        "QBZ95-1突击步枪",
+        "AKM突击步枪",
+        "M4A1突击步枪"
+      ],
+      "冲锋枪": [
+        "QCQ171冲锋枪",
+        "MP7冲锋枪",
+        "勇士冲锋枪",
+        "SR-3M紧凑突击步枪",
+        "SMG-45冲锋枪",
+        "野牛冲锋枪",
+        "UZI冲锋枪",
+        "Vector冲锋枪",
+        "P90冲锋枪",
+        "MP5冲锋枪"
+      ],
+      "霰弹枪": [
+        "725双管霰弹枪",
+        "M870霰弹枪",
+        "S12K霰弹枪",
+        "M1014霰弹枪"
+      ],
+      "轻机枪": [
+        "QJB201轻机枪",
+        "M250轻机枪",
+        "M249轻机枪",
+        "PKM轻机枪"
+      ],
+      "射手步枪": [
+        "Marlin杠杆步枪",
+        "PSG-1射手步枪",
+        "SR9射手步枪",
+        "SR-25射手步枪",
+        "SKS射手步枪",
+        "M14射手步枪",
+        "VSS射手步枪",
+        "Mini-14射手步枪"
+      ],
+      "狙击步枪": [
+        "SVD狙击步枪",
+        "AWP狙击步枪",
+        "M700狙击步枪",
+        "R93狙击步枪",
+        "SV-98狙击步枪"
+      ],
+      "特殊武器": [
+        "复合弓"
+      ],
+      "所有主武器": [
+        "MK47突击步枪",
+        "KC17突击步枪",
+        "K437突击步枪",
+        "腾龙突击步枪",
+        "AS Val突击步枪",
+        "CAR-15突击步枪",
+        "PTR-32突击步枪",
+        "G3突击步枪",
+        "SCAR-H突击步枪",
+        "AK-12突击步枪",
+        "SG552突击步枪",
+        "M7突击步枪",
+        "AUG突击步枪",
+        "M16A4突击步枪",
+        "K416突击步枪",
+        "AKS-74U突击步枪",
+        "QBZ95-1突击步枪",
+        "AKM突击步枪",
+        "M4A1突击步枪",
+        "QCQ171冲锋枪",
+        "MP7冲锋枪",
+        "勇士冲锋枪",
+        "SR-3M紧凑突击步枪",
+        "SMG-45冲锋枪",
+        "野牛冲锋枪",
+        "UZI冲锋枪",
+        "Vector冲锋枪",
+        "P90冲锋枪",
+        "MP5冲锋枪",
+        "725双管霰弹枪",
+        "M870霰弹枪",
+        "S12K霰弹枪",
+        "M1014霰弹枪",
+        "QJB201轻机枪",
+        "M250轻机枪",
+        "M249轻机枪",
+        "PKM轻机枪",
+        "Marlin杠杆步枪",
+        "PSG-1射手步枪",
+        "SR9射手步枪",
+        "SR-25射手步枪",
+        "SKS射手步枪",
+        "M14射手步枪",
+        "SVD狙击步枪",
+        "VSS射手步枪",
+        "Mini-14射手步枪",
+        "AWP狙击步枪",
+        "M700狙击步枪",
+        "R93狙击步枪",
+        "SV-98狙击步枪",
+        "复合弓"
+      ]
+    },
+    "items": [
+      {
+        "name": "MK47突击步枪",
+        "image": "static/picture/random/weapons/MK47突击步枪.png"
+      },
+      {
+        "name": "KC17突击步枪",
+        "image": "static/picture/random/weapons/KC17突击步枪.png"
+      },
+      {
+        "name": "K437突击步枪",
+        "image": "static/picture/random/weapons/K437突击步枪.png"
+      },
+      {
+        "name": "腾龙突击步枪",
+        "image": "static/picture/random/weapons/腾龙突击步枪.png"
+      },
+      {
+        "name": "AS Val突击步枪",
+        "image": "static/picture/random/weapons/AS Val突击步枪.png"
+      },
+      {
+        "name": "CAR-15突击步枪",
+        "image": "static/picture/random/weapons/CAR-15突击步枪.png"
+      },
+      {
+        "name": "PTR-32突击步枪",
+        "image": "static/picture/random/weapons/PTR-32突击步枪.png"
+      },
+      {
+        "name": "G3突击步枪",
+        "image": "static/picture/random/weapons/G3突击步枪.png"
+      },
+      {
+        "name": "SCAR-H突击步枪",
+        "image": "static/picture/random/weapons/SCAR-H突击步枪.png"
+      },
+      {
+        "name": "AK-12突击步枪",
+        "image": "static/picture/random/weapons/AK-12突击步枪.png"
+      },
+      {
+        "name": "SG552突击步枪",
+        "image": "static/picture/random/weapons/SG552突击步枪.png"
+      },
+      {
+        "name": "M7突击步枪",
+        "image": "static/picture/random/weapons/M7突击步枪.png"
+      },
+      {
+        "name": "AUG突击步枪",
+        "image": "static/picture/random/weapons/AUG突击步枪.png"
+      },
+      {
+        "name": "M16A4突击步枪",
+        "image": "static/picture/random/weapons/M16A4突击步枪.png"
+      },
+      {
+        "name": "K416突击步枪",
+        "image": "static/picture/random/weapons/K416突击步枪.png"
+      },
+      {
+        "name": "AKS-74U突击步枪",
+        "image": "static/picture/random/weapons/AKS-74U突击步枪.png"
+      },
+      {
+        "name": "QBZ95-1突击步枪",
+        "image": "static/picture/random/weapons/QBZ95-1突击步枪.png"
+      },
+      {
+        "name": "AKM突击步枪",
+        "image": "static/picture/random/weapons/AKM突击步枪.png"
+      },
+      {
+        "name": "M4A1突击步枪",
+        "image": "static/picture/random/weapons/M4A1突击步枪.png"
+      },
+      {
+        "name": "QCQ171冲锋枪",
+        "image": "static/picture/random/weapons/QCQ171冲锋枪.png"
+      },
+      {
+        "name": "MP7冲锋枪",
+        "image": "static/picture/random/weapons/MP7冲锋枪.png"
+      },
+      {
+        "name": "勇士冲锋枪",
+        "image": "static/picture/random/weapons/勇士冲锋枪.png"
+      },
+      {
+        "name": "SR-3M紧凑突击步枪",
+        "image": "static/picture/random/weapons/SR-3M紧凑突击步枪.png"
+      },
+      {
+        "name": "SMG-45冲锋枪",
+        "image": "static/picture/random/weapons/SMG-45冲锋枪.png"
+      },
+      {
+        "name": "野牛冲锋枪",
+        "image": "static/picture/random/weapons/野牛冲锋枪.png"
+      },
+      {
+        "name": "UZI冲锋枪",
+        "image": "static/picture/random/weapons/UZI冲锋枪.png"
+      },
+      {
+        "name": "Vector冲锋枪",
+        "image": "static/picture/random/weapons/Vector冲锋枪.png"
+      },
+      {
+        "name": "P90冲锋枪",
+        "image": "static/picture/random/weapons/P90冲锋枪.png"
+      },
+      {
+        "name": "MP5冲锋枪",
+        "image": "static/picture/random/weapons/MP5冲锋枪.png"
+      },
+      {
+        "name": "725双管霰弹枪",
+        "image": "static/picture/random/weapons/725双管霰弹枪.png"
+      },
+      {
+        "name": "M870霰弹枪",
+        "image": "static/picture/random/weapons/M870霰弹枪.png"
+      },
+      {
+        "name": "S12K霰弹枪",
+        "image": "static/picture/random/weapons/S12K霰弹枪.png"
+      },
+      {
+        "name": "M1014霰弹枪",
+        "image": "static/picture/random/weapons/M1014霰弹枪.png"
+      },
+      {
+        "name": "QJB201轻机枪",
+        "image": "static/picture/random/weapons/QJB201轻机枪.png"
+      },
+      {
+        "name": "M250轻机枪",
+        "image": "static/picture/random/weapons/M250轻机枪.png"
+      },
+      {
+        "name": "M249轻机枪",
+        "image": "static/picture/random/weapons/M249轻机枪.png"
+      },
+      {
+        "name": "PKM轻机枪",
+        "image": "static/picture/random/weapons/PKM轻机枪.png"
+      },
+      {
+        "name": "Marlin杠杆步枪",
+        "image": "static/picture/random/weapons/Marlin杠杆步枪.png"
+      },
+      {
+        "name": "PSG-1射手步枪",
+        "image": "static/picture/random/weapons/PSG-1射手步枪.png"
+      },
+      {
+        "name": "SR9射手步枪",
+        "image": "static/picture/random/weapons/SR9射手步枪.png"
+      },
+      {
+        "name": "SR-25射手步枪",
+        "image": "static/picture/random/weapons/SR-25射手步枪.png"
+      },
+      {
+        "name": "SKS射手步枪",
+        "image": "static/picture/random/weapons/SKS射手步枪.png"
+      },
+      {
+        "name": "M14射手步枪",
+        "image": "static/picture/random/weapons/M14射手步枪.png"
+      },
+      {
+        "name": "VSS射手步枪",
+        "image": "static/picture/random/weapons/VSS射手步枪.png"
+      },
+      {
+        "name": "Mini-14射手步枪",
+        "image": "static/picture/random/weapons/Mini-14射手步枪.png"
+      },
+      {
+        "name": "SVD狙击步枪",
+        "image": "static/picture/random/weapons/SVD狙击步枪.png"
+      },
+      {
+        "name": "AWP狙击步枪",
+        "image": "static/picture/random/weapons/AWP狙击步枪.png"
+      },
+      {
+        "name": "M700狙击步枪",
+        "image": "static/picture/random/weapons/M700狙击步枪.png"
+      },
+      {
+        "name": "R93狙击步枪",
+        "image": "static/picture/random/weapons/R93狙击步枪.png"
+      },
+      {
+        "name": "SV-98狙击步枪",
+        "image": "static/picture/random/weapons/SV-98狙击步枪.png"
+      },
+      {
+        "name": "复合弓",
+        "image": "static/picture/random/weapons/复合弓.png"
+      }
+    ]
+  },
+  "secondary_weapons": {
+    "categories": {
+      "手枪": [
+        "M1911",
+        "G17",
+        "G18",
+        "93R",
+        "QSZ92G",
+        "沙漠之鹰",
+        ".357左轮"
+      ],
+      "所有副武器": [
+        "M1911",
+        "G17",
+        "G18",
+        "93R",
+        "沙漠之鹰",
+        ".357左轮",
+        "QSZ92G"
+      ]
+    },
+    "items": [
+      {
+        "name": "M1911",
+        "image": "static/picture/random/secondary/M1911.png"
+      },
+      {
+        "name": "G17",
+        "image": "static/picture/random/secondary/G17.png"
+      },
+      {
+        "name": "G18",
+        "image": "static/picture/random/secondary/G18.png"
+      },
+      {
+        "name": "93R",
+        "image": "static/picture/random/secondary/93R.png"
+      },
+      {
+        "name": "QSZ92G",
+        "image": "static/picture/random/secondary/QSZ92G.png"
+      },
+      {
+        "name": "沙漠之鹰",
+        "image": "static/picture/random/secondary/沙漠之鹰.png"
+      },
+      {
+        "name": ".357左轮",
+        "image": "static/picture/random/secondary/.357左轮.png"
+      }
+    ]
+  },
+  "helmets": {
+    "categories": {
+      "一级头盔": [
+        "老式钢盔",
+        "安保头盔",
+        "奔尼帽",
+        "户外棒球帽"
+      ],
+      "二级头盔": [
+        "H01 战术头盔",
+        "DRO 战术头盔",
+        "复古摩托头盔",
+        "MC 防弹头盔"
+      ],
+      "三级头盔": [
+        "防暴头盔",
+        "H07 战术头盔",
+        "DAS 防弹头盔",
+        "MC201 防弹头盔"
+      ],
+      "四级头盔": [
+        "D6 战术头盔",
+        "MHS 战术头盔",
+        "GT1战术头盔",
+        "DICH 训练头盔"
+      ],
+      "五级头盔": [
+        "Mask-1铁臂头盔",
+        "GN久战重型夜视头盔",
+        "H90防暴头盔",
+        "GN重型头盔",
+        "DICH-1战术头盔",
+        "GN重型夜视头盔"
+      ],
+      "六级头盔": [
+        "H70精英头盔"
+      ],
+      "所有头盔": [
+        "老式钢盔",
+        "安保头盔",
+        "奔尼帽",
+        "户外棒球帽",
+        "H01战术头盔",
+        "DRO战术头盔",
+        "复古摩托头盔",
+        "MC防弹头盔",
+        "防暴头盔",
+        "H07战术头盔",
+        "DAS防弹头盔",
+        "MC201防弹头盔",
+        "D6战术头盔",
+        "MHS战术头盔",
+        "GT1战术头盔",
+        "DICH训练头盔",
+        "GN久战重型夜视头盔",
+        "Mask-1铁臂头盔",
+        "H90防暴头盔",
+        "GN重型头盔",
+        "DICH-1战术头盔",
+        "GN重型夜视头盔",
+        "H70精英头盔"
+      ]
+    },
+    "items": [
+      {
+        "name": "老式钢盔",
+        "image": "static/picture/random/helmets/老式钢盔.png"
+      },
+      {
+        "name": "安保头盔",
+        "image": "static/picture/random/helmets/安保头盔.png"
+      },
+      {
+        "name": "奔尼帽",
+        "image": "static/picture/random/helmets/奔尼帽.png"
+      },
+      {
+        "name": "户外棒球帽",
+        "image": "static/picture/random/helmets/户外棒球帽.png"
+      },
+      {
+        "name": "复古摩托头盔",
+        "image": "static/picture/random/helmets/复古摩托头盔.png"
+      },
+      {
+        "name": "H01 战术头盔",
+        "image": "static/picture/random/helmets/H01 战术头盔.png"
+      },
+      {
+        "name": "DRO 战术头盔",
+        "image": "static/picture/random/helmets/DRO 战术头盔.png"
+      },
+      {
+        "name": "H07 战术头盔",
+        "image": "static/picture/random/helmets/H07 战术头盔.png"
+      },
+      {
+        "name": "D6 战术头盔",
+        "image": "static/picture/random/helmets/D6 战术头盔.png"
+      },
+      {
+        "name": "MHS 战术头盔",
+        "image": "static/picture/random/helmets/MHS 战术头盔.png"
+      },
+      {
+        "name": "GT1战术头盔",
+        "image": "static/picture/random/helmets/GT1战术头盔.png"
+      },
+      {
+        "name": "DICH 训练头盔",
+        "image": "static/picture/random/helmets/DICH 训练头盔.png"
+      },
+      {
+        "name": "DICH-1战术头盔",
+        "image": "static/picture/random/helmets/DICH-1战术头盔.png"
+      },
+      {
+        "name": "MC 防弹头盔",
+        "image": "static/picture/random/helmets/MC 防弹头盔.png"
+      },
+      {
+        "name": "DAS 防弹头盔",
+        "image": "static/picture/random/helmets/DAS 防弹头盔.png"
+      },
+      {
+        "name": "MC201 防弹头盔",
+        "image": "static/picture/random/helmets/MC201 防弹头盔.png"
+      },
+      {
+        "name": "防暴头盔",
+        "image": "static/picture/random/helmets/防暴头盔.png"
+      },
+      {
+        "name": "H09 防暴头盔",
+        "image": "static/picture/random/helmets/H09 防暴头盔.png"
+      },
+      {
+        "name": "GN 久战重型夜视头盔",
+        "image": "static/picture/random/helmets/GN 久战重型夜视头盔.png"
+      },
+      {
+        "name": "Mask-1铁臂头盔",
+        "image": "static/picture/random/helmets/Mask-1铁臂头盔.png"
+      },
+      {
+        "name": "GN 重型头盔",
+        "image": "static/picture/random/helmets/GN 重型头盔.png"
+      },
+      {
+        "name": "GN重型夜视头盔",
+        "image": "static/picture/random/helmets/GN重型夜视头盔.png"
+      },
+      {
+        "name": "H70精英头盔",
+        "image": "static/picture/random/helmets/H70精英头盔.png"
+      }
+    ]
+  },
+  "armors": {
+    "categories": {
+      "一级护甲": [
+        "摩托马甲",
+        "安保防弹衣",
+        "尼龙防弹衣",
+        "轻型防弹衣"
+      ],
+      "二级护甲": [
+        "简易防刺服",
+        "HT战术背心",
+        "TG战术防弹衣",
+        "通用战术背心"
+      ],
+      "三级护甲": [
+        "Hvk快拆防弹衣",
+        "制式防弹背心",
+        "TG-H防弹衣",
+        "射手战术背心"
+      ],
+      "四级护甲": [
+        "HMP特勤防弹衣",
+        "武士防弹背心",
+        "突击手防弹背心",
+        "DT-AVS防弹背心",
+        "MK-2战术背心"
+      ],
+      "五级护甲": [
+        "精英防弹背心",
+        "Hvk-2防弹衣",
+        "FS复合防弹衣",
+        "重型突击背心"
+      ],
+      "六级护甲": [
+        "HA-2重型防弹衣"
+      ],
+      "所有护甲": [
+        "摩托马甲",
+        "安保防弹衣",
+        "尼龙防弹衣",
+        "轻型防弹衣",
+        "简易防刺服",
+        "HT战术背心",
+        "TG战术防弹衣",
+        "通用战术背心",
+        "Hvk快拆防弹衣",
+        "制式防弹背心",
+        "TG-H防弹衣",
+        "射手战术背心",
+        "HMP特勤防弹衣",
+        "武士防弹背心",
+        "突击手防弹背心",
+        "DT-AVS防弹背心",
+        "MK-2战术背心",
+        "精英防弹背心",
+        "Hvk-2防弹衣",
+        "FS复合防弹衣",
+        "重型突击背心",
+        "HA-2重型防弹衣"
+      ]
+    },
+    "items": [
+      {
+        "name": "摩托马甲",
+        "image": "static/picture/random/armors/摩托马甲.png"
+      },
+      {
+        "name": "安保防弹衣",
+        "image": "static/picture/random/armors/安保防弹衣.png"
+      },
+      {
+        "name": "尼龙防弹衣",
+        "image": "static/picture/random/armors/尼龙防弹衣.png"
+      },
+      {
+        "name": "轻型防弹衣",
+        "image": "static/picture/random/armors/轻型防弹衣.png"
+      },
+      {
+        "name": "简易防刺服",
+        "image": "static/picture/random/armors/简易防刺服.png"
+      },
+      {
+        "name": "HT战术背心",
+        "image": "static/picture/random/armors/HT战术背心.png"
+      },
+      {
+        "name": "TG战术防弹衣",
+        "image": "static/picture/random/armors/TG战术防弹衣.png"
+      },
+      {
+        "name": "通用战术背心",
+        "image": "static/picture/random/armors/通用战术背心.png"
+      },
+      {
+        "name": "制式防弹背心",
+        "image": "static/picture/random/armors/制式防弹背心.png"
+      },
+      {
+        "name": "射手战术背心",
+        "image": "static/picture/random/armors/射手战术背心.png"
+      },
+      {
+        "name": "MK-2战术背心",
+        "image": "static/picture/random/armors/MK-2战术背心.png"
+      },
+      {
+        "name": "Hvk快拆防弹衣",
+        "image": "static/picture/random/armors/Hvk快拆防弹衣.png"
+      },
+      {
+        "name": "TG-H防弹衣",
+        "image": "static/picture/random/armors/TG-H防弹衣.png"
+      },
+      {
+        "name": "HMP特勤防弹衣",
+        "image": "static/picture/random/armors/HMP特勤防弹衣.png"
+      },
+      {
+        "name": "武士防弹背心",
+        "image": "static/picture/random/armors/武士防弹背心.png"
+      },
+      {
+        "name": "突击手防弹背心",
+        "image": "static/picture/random/armors/突击手防弹背心.png"
+      },
+      {
+        "name": "DT-AVS防弹背心",
+        "image": "static/picture/random/armors/DT-AVS防弹背心.png"
+      },
+      {
+        "name": "精英防弹背心",
+        "image": "static/picture/random/armors/精英防弹背心.png"
+      },
+      {
+        "name": "Hvk-2防弹衣",
+        "image": "static/picture/random/armors/Hvk-2防弹衣.png"
+      },
+      {
+        "name": "FS复合防弹衣",
+        "image": "static/picture/random/armors/FS复合防弹衣.png"
+      },
+      {
+        "name": "重型突击背心",
+        "image": "static/picture/random/armors/重型突击背心.png"
+      },
+      {
+        "name": "HA-2重型防弹衣",
+        "image": "static/picture/random/armors/HA-2重型防弹衣.png"
+      }
+    ]
+  }
 }

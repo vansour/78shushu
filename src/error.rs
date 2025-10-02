@@ -40,15 +40,35 @@ impl axum::response::IntoResponse for AppError {
 
         let (status, error_message) = match &self {
             AppError::RandomGenerationError(_) => {
+                tracing::error!(target: "error", "随机生成错误: {}", self);
                 (StatusCode::INTERNAL_SERVER_ERROR, self.to_string())
             }
-            AppError::QuestionError(_) => (StatusCode::NOT_FOUND, self.to_string()),
-            AppError::MusicError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
-            AppError::IoError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
-            AppError::JsonError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
-            AppError::BadRequest(_) => (StatusCode::BAD_REQUEST, self.to_string()),
-            AppError::NotFound(_) => (StatusCode::NOT_FOUND, self.to_string()),
+            AppError::QuestionError(_) => {
+                tracing::error!(target: "error", "题目查询错误: {}", self);
+                (StatusCode::NOT_FOUND, self.to_string())
+            }
+            AppError::MusicError(_) => {
+                tracing::error!(target: "error", "音乐播放器错误: {}", self);
+                (StatusCode::INTERNAL_SERVER_ERROR, self.to_string())
+            }
+            AppError::IoError(_) => {
+                tracing::error!(target: "error", "IO错误: {}", self);
+                (StatusCode::INTERNAL_SERVER_ERROR, self.to_string())
+            }
+            AppError::JsonError(_) => {
+                tracing::error!(target: "error", "JSON序列化错误: {}", self);
+                (StatusCode::INTERNAL_SERVER_ERROR, self.to_string())
+            }
+            AppError::BadRequest(_) => {
+                tracing::warn!(target: "error", "请求参数错误: {}", self);
+                (StatusCode::BAD_REQUEST, self.to_string())
+            }
+            AppError::NotFound(_) => {
+                tracing::warn!(target: "error", "资源未找到: {}", self);
+                (StatusCode::NOT_FOUND, self.to_string())
+            }
             AppError::InternalServerError(_) => {
+                tracing::error!(target: "error", "内部服务器错误: {}", self);
                 (StatusCode::INTERNAL_SERVER_ERROR, self.to_string())
             }
         };

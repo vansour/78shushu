@@ -1,4 +1,5 @@
 mod error;
+mod logger;
 mod music;
 mod question;
 mod random;
@@ -20,7 +21,7 @@ async fn index() -> Html<&'static str> {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 初始化日志记录
-    tracing_subscriber::fmt::init();
+    logger::init();
 
     // 配置CORS（生产环境应该限制为特定域名）
     let cors = CorsLayer::new()

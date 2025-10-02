@@ -8,8 +8,7 @@
       "40发",
       "60发"
     ],
-    "correct_answer": 1,
-    "difficulty": "简单"
+    "correct_answer": 1
   },
   {
     "id": 2,
@@ -20,8 +19,7 @@
       "弹药类型",
       "瞄准镜倍数"
     ],
-    "correct_answer": 1,
-    "difficulty": "中等"
+    "correct_answer": 1
   },
   {
     "id": 3,
@@ -32,8 +30,7 @@
       "1981年",
       "1983年"
     ],
-    "correct_answer": 0,
-    "difficulty": "困难"
+    "correct_answer": 0
   },
   {
     "id": 4,
@@ -44,8 +41,7 @@
       "机关枪",
       "火箭筒"
     ],
-    "correct_answer": 1,
-    "difficulty": "简单"
+    "correct_answer": 1
   },
   {
     "id": 5,
@@ -57,7 +53,7 @@
       "公园区域"
     ],
     "correct_answer": 1,
-    "difficulty": "中等"
+    "difficulty": "medium"
   },
   {
     "id": 6,
@@ -69,7 +65,7 @@
       "400-800米"
     ],
     "correct_answer": 2,
-    "difficulty": "中等"
+    "difficulty": "medium"
   },
   {
     "id": 7,
@@ -81,7 +77,7 @@
       "医疗救护"
     ],
     "correct_answer": 1,
-    "difficulty": "简单"
+    "difficulty": "easy"
   },
   {
     "id": 8,
@@ -93,7 +89,7 @@
       "10秒"
     ],
     "correct_answer": 1,
-    "difficulty": "简单"
+    "difficulty": "easy"
   },
   {
     "id": 9,
@@ -105,7 +101,7 @@
       "以上都是"
     ],
     "correct_answer": 3,
-    "difficulty": "困难"
+    "difficulty": "hard"
   },
   {
     "id": 10,
@@ -117,7 +113,7 @@
       "18个月"
     ],
     "correct_answer": 1,
-    "difficulty": "困难"
+    "difficulty": "hard"
   },
   {
     "id": 11,
@@ -129,7 +125,7 @@
       "铁瞄 + 战术灯"
     ],
     "correct_answer": 2,
-    "difficulty": "中等"
+    "difficulty": "medium"
   },
   {
     "id": 12,
@@ -141,7 +137,7 @@
       "集装箱堆叠区"
     ],
     "correct_answer": 2,
-    "difficulty": "困难"
+    "difficulty": "hard"
   },
   {
     "id": 13,
@@ -153,7 +149,7 @@
       "6级"
     ],
     "correct_answer": 0,
-    "difficulty": "简单"
+    "difficulty": "easy"
   },
   {
     "id": 14,
@@ -165,7 +161,7 @@
       "50-100米"
     ],
     "correct_answer": 1,
-    "difficulty": "中等"
+    "difficulty": "medium"
   },
   {
     "id": 15,
@@ -177,7 +173,7 @@
       "35-45分钟"
     ],
     "correct_answer": 1,
-    "difficulty": "简单"
+    "difficulty": "easy"
   },
   {
     "id": 16,
@@ -189,7 +185,7 @@
       "随时都可以扣扳机"
     ],
     "correct_answer": 1,
-    "difficulty": "困难"
+    "difficulty": "hard"
   },
   {
     "id": 17,
@@ -201,7 +197,7 @@
       "地下隧道潜入"
     ],
     "correct_answer": 3,
-    "difficulty": "中等"
+    "difficulty": "medium"
   },
   {
     "id": 18,
@@ -213,7 +209,7 @@
       "15-20米"
     ],
     "correct_answer": 1,
-    "difficulty": "中等"
+    "difficulty": "medium"
   },
   {
     "id": 19,
@@ -225,7 +221,7 @@
       "侦察-突破-压制-占领"
     ],
     "correct_answer": 0,
-    "difficulty": "困难"
+    "difficulty": "hard"
   },
   {
     "id": 20,
@@ -237,6 +233,6 @@
       "特种兵王"
     ],
     "correct_answer": 2,
-    "difficulty": "简单"
+    "difficulty": "easy"
   }
 ]

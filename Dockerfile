@@ -41,8 +41,8 @@ COPY --from=builder /app/target/release/shushu78 /app/shushu78
 # 复制静态文件
 COPY --from=builder /app/static /app/static
 
-# 更改文件所有者
-RUN chown -R appuser:appuser /app
+# 创建 logs 目录并更改文件所有者
+RUN mkdir -p /app/logs && chown -R appuser:appuser /app
 
 # 切换到非root用户
 USER appuser

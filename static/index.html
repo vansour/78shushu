@@ -12,43 +12,69 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
+    <!-- 顶部菜单栏 -->
+    <nav class="navbar">
+        <div class="navbar-brand">
             <h1>🐭 三角洲鼠鼠工具</h1>
         </div>
-        
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('loadout')">🎲 随机装备</button>
-            <button class="tab-btn" onclick="switchTab('exam')">📝 三角洲高考</button>
+        <div class="navbar-menu">
+            <button class="menu-item active" onclick="switchTab('loadout')">🎲 随机装备</button>
+            <button class="menu-item" onclick="switchTab('exam')">📝 三角洲高考</button>
         </div>
+    </nav>
+
+    <div class="container">
         
         <!-- 随机装备模块 -->
         <div id="loadout-tab" class="tab-content active">
-            <div class="controls">
-                <button class="btn primary" onclick="generateFullLoadout()">🎲 生成完整配置</button>
+            <div class="controls-row">
+                <button class="btn primary" onclick="generateFullLoadout()">随机装备</button>
+                <div class="filter-options">
+                    <label class="filter-label">
+                        <input type="checkbox" id="classifiedOnly">
+                        <span>只玩机密/绝密</span>
+                    </label>
+                    <label class="filter-label">
+                        <input type="checkbox" id="excludePistols">
+                        <span>排除手枪</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- 加载提示 -->
+            <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+                <div class="spinner"></div>
             </div>
             
             <div id="fullLoadout" class="full-loadout" style="display: none;">
-                <h2>🎯 完整配置</h2>
-                <div class="loadout-grid">
+                <!-- 第一排：地图和干员 -->
+                <div class="loadout-row">
                     <div class="loadout-item">
                         <h4>地图</h4>
+                        <img id="fullMapImg" class="loadout-image" src="" alt="地图" style="display: none;">
                         <div class="value" id="fullMap">-</div>
                     </div>
                     <div class="loadout-item">
                         <h4>干员</h4>
+                        <img id="fullOperatorImg" class="loadout-image" src="" alt="干员" style="display: none;">
                         <div class="value" id="fullOperator">-</div>
                     </div>
+                </div>
+                <!-- 第二排：武器、头盔、护甲 -->
+                <div class="loadout-row">
                     <div class="loadout-item">
                         <h4>主武器</h4>
+                        <img id="fullWeaponImg" class="loadout-image" src="" alt="主武器" style="display: none;">
                         <div class="value" id="fullWeapon">-</div>
                     </div>
                     <div class="loadout-item">
                         <h4>头盔</h4>
+                        <img id="fullHelmetImg" class="loadout-image" src="" alt="头盔" style="display: none;">
                         <div class="value" id="fullHelmet">-</div>
                     </div>
                     <div class="loadout-item">
                         <h4>护甲</h4>
+                        <img id="fullArmorImg" class="loadout-image" src="" alt="护甲" style="display: none;">
                         <div class="value" id="fullArmor">-</div>
                     </div>
                 </div>
@@ -59,27 +85,12 @@
         <div id="exam-tab" class="tab-content">
             <div class="controls">
                 <button class="btn exam primary" onclick="getRandomQuestion()">📝 随机题目</button>
-                <button class="btn exam" onclick="getQuestionByCategory('weapons')">🔫 武器知识</button>
-                <button class="btn exam" onclick="getQuestionByCategory('maps')">🗺️ 地图熟悉</button>
-                <button class="btn exam" onclick="getQuestionByCategory('tactics')">⚡ 战术策略</button>
-                <button class="btn exam" onclick="getQuestionByCategory('equipment')">🛡️ 装备配件</button>
-                <button class="btn exam" onclick="getQuestionByCategory('game')">🎮 游戏机制</button>
-            </div>
-            
-            <div class="controls">
-                <button class="btn exam" onclick="getQuestionByDifficulty('easy')">😊 简单</button>
-                <button class="btn exam" onclick="getQuestionByDifficulty('medium')">😐 中等</button>
-                <button class="btn exam" onclick="getQuestionByDifficulty('hard')">😤 困难</button>
             </div>
             
             <div id="examContainer" class="exam-container" style="display: none;">
                 <div class="question-card">
                     <div class="question-header">
                         <h2>📝 三角洲高考</h2>
-                        <div class="question-meta">
-                            <span class="meta-tag" id="questionCategory">-</span>
-                            <span class="meta-tag" id="questionDifficulty">-</span>
-                        </div>
                     </div>
                     
                     <div class="question-text" id="questionText">
@@ -97,7 +108,6 @@
                     <div class="result-panel" id="resultPanel">
                         <div class="result-title" id="resultTitle"></div>
                         <div id="correctAnswer"></div>
-                        <div class="explanation" id="explanation"></div>
                     </div>
                 </div>
             </div>
@@ -181,6 +191,6 @@
         🎵
     </div>
 
-    <script src="/static/script.js"></script>
+    <script src="/static/script.js?v=2.0"></script>
 </body>
 </html>
